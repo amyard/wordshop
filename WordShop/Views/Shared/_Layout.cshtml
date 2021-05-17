@@ -1,52 +1,108 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WordShop</title>
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Марафон «Wordshop»</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#F3556C">
+    <meta name="msapplication-navbutton-color" content="#F3556C">
+    <meta name="apple-mobile-web-app-capable" content="#F3556C">
+    <link href="~/css/main.css" rel="stylesheet">
+    
+    <!-- Template Basic Images Start -->
+    <link rel="icon" href="~/img/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/img/favicon/apple-touch-icon-180x180.png">
+    <!-- Template Basic Images End -->
 </head>
+
 <body>
 
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WordShop</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>
-    
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
+    <header class="header">
         <div class="container">
-            &copy; 2021 - WordShop
+            <nav class="page-nav">
+                <ul>
+                    <li><a href="#for-whom">Для кого марафон</a></li>
+                    <li><a href="#result">Результаты</a></li>
+                    <li><a href="#bonus">Бонусы</a></li>
+                    <li><a href="#schedule">Расписание</a></li>
+                    <li><a href="#tariff">Тарифы</a></li>
+                </ul>
+            </nav>
         </div>
-    </footer>
+    </header>
+
+    
+    <main class="home">
+        @RenderBody()
+    </main>
+
+
+    <!-- modals -->
+    <div class="modal-overlay">
+        <div id="tariff-modal" class="modal modal-form" tabindex="-1" role="dialog">
+            <button type="button" class="modal-close-btn js-close-btn">Close
+                <svg class="icon-sprite svg-icon">
+                    <use xlink:href="img/symbol_sprite.svg#icon-close"></use>
+                </svg>
+            </button>
+            <div class="modal-subtitle">Тариф «<span class="tariff-name">Silver</span>»</div>
+            <h3>Марафон «Wordshop», начальный уровень</h3>
+    
+            <div class="modal-error">
+                <div class="modal-error-title">Ошибка</div>
+                <div class="modal-error-text">При отправке формы возникла непредвиденная ошибка.</div>
+                <div class="modal-error-text">Попробуйте ещё раз.</div>
+            </div>
+    
+            <form id="tariff-form">
+                <div class="field">
+                    <label for="user-name">Имя</label>
+                    <input type="text" class="form-control" name="user-name" id="user-name">
+                </div>
+                <div class="field">
+                    <label for="user-email">Почта</label>
+                    <input type="email" class="form-control" name="user-email" id="user-email">
+                </div>
+                <div class="field">
+                    <label for="user-phone">Телефон</label>
+                    <span class="field-mark">Необязательное поле</span>
+                    <input type="text" class="form-control phone-input" name="user-phone" id="user-phone" placeholder="+38 (___) ___-__-__">
+                </div>
+                <input type="hidden" name="user-tariff" id="user-tariff">
+                <input type="submit" class="btn primary-btn" value="Купить">
+            </form>
+        </div>
+    
+        <div id="success-modal" class="modal success-modal" tabindex="-1" role="dialog">
+            <button type="button" class="modal-close-btn js-close-btn">Close
+                <svg class="icon-sprite svg-icon">
+                    <use xlink:href="img/symbol_sprite.svg#icon-close"></use>
+                </svg>
+            </button>
+            <div class="modal-subtitle">Тариф «<span class="tariff-name">Silver</span>»</div>
+            <h3>Марафон «Wordshop», начальный уровень</h3>
+            <div class="modal-message">
+                <div class="modal-message-title">Поздравляю! Вы стали участником марафона по-английскому</div>
+                <div class="modal-message-text">Для уточнения деталей я с вами свяжусь в ближайшее время.</div>
+            </div>
+            <a href="#schedule" class="btn primary-btn js-close-btn">К расписанию</a>
+        </div>
+    </div>
+    <!-- </modals -->
+
     
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/svg4everybody.min.js"></script>
+    <script>svg4everybody();</script>
+
+    <script src="~/js/lightslider.min.js"></script>
+    <script src="~/js/maskedinput.js"></script>
+    <script src="~/js/main.js"></script>
     
     @await RenderSectionAsync("Scripts", required: false)
 </body>

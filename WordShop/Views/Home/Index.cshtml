@@ -1,8 +1,359 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
+<section class="hero">
+	<div class="container-fluid gradient-block">
+		<div class="container">
+			<div class="content">
+				<div class="subtitle">Марафон «Wordshop»</div>
+				<h1>Сделай первые шаги в изучении английского</h1>
+				<p>Старт марафона 25 апреля 2021</p>
+				<a href="#tariff" class="btn primary-btn">Выбрать тариф</a>
+			</div>
+			<div class="hero-img-wrap">
+				<div class="hero-img-circle"></div>
+				<picture class="hero-img">
+					<source srcset="img/hero-img-m.webp 767w, img/hero-img.webp" type="image/webp">
+					<source srcset="img/hero-img-m.png 767w, img/hero-img.png" type="image/png">
+					<img src="~/img/hero-img.png" alt="">
+				</picture>
+				<img class="butterfly butterfly-1 floating" src="~/img/butterfly1.png" alt="Butterfly" loading="lazy">
+				<img class="butterfly butterfly-2 floating2" src="~/img/butterfly2.png" alt="Butterfly" loading="lazy">
+				<img class="butterfly butterfly-3 floating3" src="~/img/butterfly3.png" alt="Butterfly" loading="lazy">
+				<img class="butterfly butterfly-4 floating4" src="~/img/butterfly4.png" alt="Butterfly" loading="lazy">
+				<img class="butterfly butterfly-5 floating5" src="~/img/butterfly5.png" alt="Butterfly" loading="lazy">
+			</div>
+		</div>
+	</div>
+</section>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="section-padding" id="for-whom">
+	<div class="container">
+		<div class="block-info">
+			<div class="block-info-title">
+				<h2>Этот марафон для тебя, если понимаешь, что английский — это:</h2>
+			</div>
+			<div class="block-info-content">
+				<ul>
+					<li>Новые карьерные возможности, но не знаешь с чего и как начать, не хватает времени — маленький ребенок, работа, домашние дела.</li>
+					<li>Новые знакомства для работы и романтических отношений, но нет способности к языкам.</li>
+					<li>Нужна информация с англоязычных ресурсов, и тик-тока в том числе, но часто размышляешь, что английский — это долго и дорого.</li>
+					<li>Фитнес для мозга, улучшение памяти, внимания, концентрации, но как-то пробовал и не было результата.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section-padding section-result" id="result">
+	<div class="container">
+		<div class="section-title">
+			<h2>Какой будет результат за 7 дней</h2>
+		</div>
+
+		<div class="row">
+			<div class="col-3">
+				<div class="result-item">
+					<svg class="icon-sprite svg-icon result-icon">
+						<use xlink:href="img/symbol_sprite.svg#icon1"></use>
+					</svg>
+					<div class="result-text">Выучишь 150 новых слов и закрепишь их с помощью интерактивных игр, каждый день новая игра.</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="result-item">
+					<svg class="icon-sprite svg-icon result-icon">
+						<use xlink:href="img/symbol_sprite.svg#icon2"></use>
+					</svg>
+					<div class="result-text">Освоишь 10 базовых правил английского.</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="result-item">
+					<svg class="icon-sprite svg-icon result-icon">
+						<use xlink:href="img/symbol_sprite.svg#icon3"></use>
+					</svg>
+					<div class="result-text">Прочитаешь и прослушаешь необычную, романтическую историю на английском.</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="result-item">
+					<svg class="icon-sprite svg-icon result-icon">
+						<use xlink:href="img/symbol_sprite.svg#icon4"></use>
+					</svg>
+					<div class="result-text">Начнешь учиться воспринимать английский на слух.</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="result-item">
+					<svg class="icon-sprite svg-icon result-icon">
+						<use xlink:href="img/symbol_sprite.svg#icon5"></use>
+					</svg>
+					<div class="result-text">Научишься улучшать свой английский за 10 мин. в день без отрыва от основных дел, пока ребенок спит или начальник вышел.</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="result-item">
+					<svg class="icon-sprite svg-icon result-icon">
+						<use xlink:href="img/symbol_sprite.svg#icon6"></use>
+					</svg>
+					<div class="result-text">Начнешь закреплять полезную привычку заниматься английским ежедневно, эта привычка определяет будешь ты знать английский или нет, а не твои способности к языкам.</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<section class="section-padding gradient-section bonus-section" id="bonus">
+	<div class="container">
+		<div class="section-title">
+			<h2>Бонусы всем участникам марафона, которые выполнят домашние задания</h2>
+		</div>
+
+		<div class="row">
+			<div class="col-3">
+				<div class="bonus-item">
+					<svg class="icon-sprite svg-icon bonus-icon">
+						<use xlink:href="img/symbol_sprite.svg#icon7"></use>
+					</svg>
+					<div class="bonus-text">Видео урок «Начни общаться с иностранцами после первого урока английского»</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="bonus-item">
+					<svg class="icon-sprite svg-icon bonus-icon">
+						<use xlink:href="img/symbol_sprite.svg#icon8"></use>
+					</svg>
+					<div class="bonus-text">Обзор приложения в котором каждый с легкостью найдет себе языкового партнера</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="bonus-item">
+					<svg class="icon-sprite svg-icon bonus-icon">
+						<use xlink:href="img/symbol_sprite.svg#icon9"></use>
+					</svg>
+					<div class="bonus-text">Советы по регистрации</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="bonus-item">
+					<svg class="icon-sprite svg-icon bonus-icon">
+						<use xlink:href="img/symbol_sprite.svg#icon10"></use>
+					</svg>
+					<div class="bonus-text">Рекомендации как выбирать языковых партнеров избегая мошенников</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="bonus-item">
+					<svg class="icon-sprite svg-icon bonus-icon">
+						<use xlink:href="img/symbol_sprite.svg#icon11"></use>
+					</svg>
+					<div class="bonus-text">3 чек листа с фразами для первого общения и знакомства</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section-padding" id="schedule">
+	<div class="container">
+		<div class="section-title">
+			<h2>Расписание марафона</h2>
+			<div class="description-block">
+				<div class="description-block-title">Как заниматься?</div>
+				<div class="description-block-text">По 10-15 минут на просмотр видеоуроков по грамматике, чтение и прослушивание, а также игры со словами.</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-clear-right">
+		<div class="slider-day js-slider-day">
+
+			<div class="slider-day-item">
+				<div class="slider-item-title">День №1</div>
+				<div class="slider-item-subtitle">Грамматика</div>
+				<ul>
+					<li>Видео урок 1. Разберем самый распространенный английский глагол — «to be».</li>
+					<li>Видео урок 2. Разберем структуру с помощью которой сможем описывать все что угодно — «there is, there are».</li>
+					<li>Презентации к урокам с примерами.</li>
+				</ul>
+				<div class="slider-item-subtitle">Чтение</div>
+				<ul>
+					<li>Узнаешь основное правило прослушивания.</li>
+					<li>Прочитаешь часть рассказа и узнаешь, как может повезти в пасмурный, дождливый день.</li>
+				</ul>
+				<div class="slider-item-subtitle">Слова</div>
+				<ul>
+					<li>Игра на запоминание слов — «Сопоставление».</li>
+				</ul>
+			</div>
+
+			<div class="slider-day-item">
+				<div class="slider-item-title">День №2</div>
+				<div class="slider-item-subtitle">Грамматика</div>
+				<ul>
+					<li>Видео урок 1. Разберем волшебные слова — вспомогательные глаголы «do» и «does».</li>
+					<li>Видео урок 2. Разберем окончание глаголов -s и -es. Почему play, а иногда plays.</li>
+				</ul>
+				<div class="slider-item-subtitle">Чтение</div>
+				<ul>
+					<li>Прочитаешь продолжение рассказа «Кража в магазине».</li>
+				</ul>
+				<div class="slider-item-subtitle">Слова</div>
+				<ul>
+					<li>Игра на запоминание слов — «Найди пару».</li>
+				</ul>
+			</div>
+
+			<div class="slider-day-item">
+				<div class="slider-item-title">День №3</div>
+				<div class="slider-item-subtitle">Грамматика</div>
+				<ul>
+					<li>Видео урок 1. Разберем волшебные слова — вспомогательные глаголы «do» и «does».</li>
+					<li>Видео урок 2. Разберем окончание глаголов -s и -es. Почему play, а иногда plays.</li>
+				</ul>
+				<div class="slider-item-subtitle">Чтение</div>
+				<ul>
+					<li>Прочитаешь продолжение рассказа «Кража в магазине».</li>
+				</ul>
+				<div class="slider-item-subtitle">Слова</div>
+				<ul>
+					<li>Игра на запоминание слов — «Найди пару».</li>
+				</ul>
+			</div>
+
+			<div class="slider-day-item">
+				<div class="slider-item-title">День №4</div>
+				<div class="slider-item-subtitle">Грамматика</div>
+				<ul>
+					<li>Видео урок «Есть только миг между прошлым и будущим». Именно он называется Present Continuous.</li>
+				</ul>
+				<div class="slider-item-subtitle">Чтение</div>
+				<ul>
+					<li>Продолжаем читать рассказ «Что он хочет этот странный незнакомец?».</li>
+				</ul>
+				<div class="slider-item-subtitle">Слова</div>
+				<ul>
+					<li>Игра на запоминание слов — «Викторина».</li>
+				</ul>
+			</div>
+
+			<div class="slider-day-item">
+				<div class="slider-item-title">День №5</div>
+				<div class="slider-item-subtitle">Грамматика</div>
+				<ul>
+					<li>Видео урок «Управляем будущим — going to».</li>
+				</ul>
+				<div class="slider-item-subtitle">Чтение</div>
+				<ul>
+					<li>Читаем дальше «Странное стечение обстоятельств , кража в магазине удача?».</li>
+				</ul>
+				<div class="slider-item-subtitle">Слова</div>
+				<ul>
+					<li>Игра на запоминание слов — «Составление пар».</li>
+				</ul>
+			</div>
+
+			<div class="slider-day-item">
+				<div class="slider-item-title">День №6</div>
+				<div class="slider-item-subtitle">Грамматика</div>
+				<ul>
+					<li>Сикретики множественного числа.</li>
+				</ul>
+				<div class="slider-item-subtitle">Чтение</div>
+				<ul>
+					<li>Заканчиваем читать рассказ «Незнакомец оказался не так уж и плох».</li>
+				</ul>
+				<div class="slider-item-subtitle">Слова</div>
+				<ul>
+					<li>Игра на запоминание слов — «Поиск слов».</li>
+				</ul>
+			</div>
+
+			<div class="slider-day-item">
+				<div class="slider-item-title">День №7</div>
+				<div class="slider-item-subtitle">Грамматика</div>
+				<ul>
+					<li>Запоминаем на ура эти сложные слова — this, these, that и those.</li>
+				</ul>
+				<div class="slider-item-subtitle">Чтение</div>
+				<ul>
+					<li>Прочитаешь последнюю часть рассказа «неожиданная втреча».</li>
+				</ul>
+				<div class="slider-item-subtitle">Слова</div>
+				<ul>	
+					<li>Игра на запоминание слов — «Открой поле».</li>
+				</ul>
+			</div>
+
+		</div>
+		<div class="slider-day-nav"></div>
+	</div>
+</section>
+
+<section class="section-padding gradient-section tariffs-section" id="tariff">
+	<div class="container">
+		<div class="section-title">
+			<h2>Тарифы</h2>
+		</div>
+
+		<div class="tariffs-block js-tariff-slider">
+
+			<div class="item-wrapper">
+				<div class="tariffs-item">
+					<div class="tariffs-item-title">Bronze</div>
+					<div class="tariffs-item-price">$2&nbsp;<span class="old-price">/&nbsp;</span><s class="old-price">$4</s></div>
+					<button type="button" class="btn primary-btn" data-modal="tariff-modal">Купить тариф</button>
+					<ul class="include-list">
+						<li>Аудио и pdf-файлы с текстом  рассказа</li>
+						<li>Видеоуроки с грамматикой</li>
+						<li>Интерактивные игры со словами</li>
+					</ul>
+					<ul class="exclude-list">
+						<li>Доступ к специальному чату с участниками</li>
+						<li>Ответы на вопросы в чате от Анны</li>
+						<li>Проверка домашних заданий</li>
+						<li>Возможность получить бонусный урок про знакомство с иностранцами</li>
+						<li>1,5 часовое индивидуальное занятие с Анной</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="item-wrapper">
+				<div class="tariffs-item">
+					<div class="tariffs-item-title">Silver</div>
+					<div class="tariffs-item-price">$5&nbsp;<span class="old-price">/&nbsp;</span><s class="old-price">$9</s></div>
+					<button type="button" class="btn primary-btn" data-modal="tariff-modal">Купить тариф</button>
+					<ul class="include-list">
+						<li>Аудио и pdf-файлы с текстом  рассказа</li>
+						<li>Видеоуроки с грамматикой</li>
+						<li>Интерактивные игры со словами</li>
+						<li>Доступ к специальному чату с участниками</li>
+						<li>Ответы на вопросы в чате от Анны</li>
+						<li>Проверка домашних заданий</li>
+						<li>Возможность получить бонусный урок про знакомство с иностранцами</li>
+					</ul>
+					<ul class="exclude-list">
+						<li>1,5 часовое индивидуальное занятие с Анной</li>
+					</ul>
+				</div>
+			</div>
+			<div class="item-wrapper">
+				<div class="tariffs-item">
+					<div class="tariffs-item-title">Gold</div>
+					<div class="tariffs-item-price">$10&nbsp;<span class="old-price">/&nbsp;</span><s class="old-price">$18</s></div>
+					<button type="button" class="btn primary-btn" data-modal="tariff-modal">Купить тариф</button>
+					<ul class="include-list">
+						<li>Аудио и pdf-файлы с текстом  рассказа</li>
+						<li>Видеоуроки с грамматикой</li>
+						<li>Интерактивные игры со словами</li>
+						<li>Доступ к специальному чату с участниками</li>
+						<li>Ответы на вопросы в чате от Анны</li>
+						<li>Проверка домашних заданий</li>
+						<li>Возможность получить бонусный урок про знакомство с иностранцами</li>
+						<li>1,5 часовое индивидуальное занятие с Анной</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</section>
