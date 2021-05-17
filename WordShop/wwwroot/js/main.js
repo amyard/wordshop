@@ -95,40 +95,42 @@ jQuery(function($){
     });
 
     //form mask
-    $('.phone-input').mask("+38 (999) 999 99 99");
+    $('.phone-input').mask("+99 (999) 999 99 99");
 
     //submit form
 
-    $('#tariff-form').on('submit', function(e) {
-        e.preventDefault();
-
-        var inputErrorText = '<span class="field-error">Заполните поле</span>';
-        var errorCounter = 0;
-
-        $(this).find('input[name]').each(function() {
-            var parent = $(this).closest('.field');
-
-            if($(this).val() === '') {
-                errorCounter++;
-                parent.addClass('has-error');
-                parent.append(inputErrorText);
-            } else {
-                if(parent.hasClass('has-error')) {
-                    parent.removeClass('has-error');
-                    parent.find('.field-error').remove();
-                }
+    $("#tariff-form").validate({
+        rules: {
+            user_name: {
+                required : true
+            },
+            user_email: {
+                required : true,
+                email : true,
+                regex : /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
             }
-        });
+        },
+        messages: {
+            user_name: {
+                required : "Заполните поле"
+            },
+            user_email: {
+                required : "Заполните поле",
+                email : "Невалидная электронная почта",
+                regex : "Адрес должен быть вида name@domain.com"
+            }
+        },
+        errorClass: "validate-error",
+        submitHandler: function (form) {
+            console.log("submitHandler");
 
-        if(errorCounter < 1) {
-            $(this).closest('.modal.modal-form').removeClass('before-show show');
+            $("#tariff-form").closest('.modal.modal-form').removeClass('before-show show');
             $('.success-modal').addClass('before-show');
             setTimeout(function() {
                 $('.success-modal').addClass('show');
             }, 50);
+
         }
-    })
-
+    });
+    
 });
-
-

@@ -2225,7 +2225,8 @@ body.open-modal .modal.show
 {
     margin-top: -8px;
 }
-.field .field-error
+.field .field-error,
+.field label.validate-error
 {
     font-size: 12px;
 
@@ -2235,7 +2236,12 @@ body.open-modal .modal.show
 
     color: #c40e29;
 }
-.field.has-error .form-control
+.field label.validate-error
+{
+    bottom: -24px;
+}
+.field.has-error .form-control,
+.field input.form-control.validate-error
 {
     border-color: #c40e29;
 }

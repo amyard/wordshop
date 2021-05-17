@@ -61,16 +61,16 @@
             <form id="tariff-form">
                 <div class="field">
                     <label for="user-name">Имя</label>
-                    <input type="text" class="form-control" name="user-name" id="user-name">
+                    <input type="text" class="form-control" name="user_name" id="user_name">
                 </div>
                 <div class="field">
                     <label for="user-email">Почта</label>
-                    <input type="email" class="form-control" name="user-email" id="user-email">
+                    <input type="email" class="form-control" name="user_email" id="user_email">
                 </div>
                 <div class="field">
                     <label for="user-phone">Телефон</label>
                     <span class="field-mark">Необязательное поле</span>
-                    <input type="text" class="form-control phone-input" name="user-phone" id="user-phone" placeholder="+38 (___) ___-__-__">
+                    <input type="text" class="form-control phone-input" name="user-phone" id="user-phone" placeholder="+__ (___) ___-__-__">
                 </div>
                 <input type="hidden" name="user-tariff" id="user-tariff">
                 <input type="submit" class="btn primary-btn" value="Купить">
@@ -102,6 +102,8 @@
 
     <script src="~/js/lightslider.min.js"></script>
     <script src="~/js/maskedinput.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/js/main.js"></script>
     
     @await RenderSectionAsync("Scripts", required: false)
