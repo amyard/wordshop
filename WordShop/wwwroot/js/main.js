@@ -73,7 +73,10 @@ jQuery(function($){
 
     $('[data-modal]').on('click', function() {
         var tariffTitle = $(this).closest('.tariffs-item').find('.tariffs-item-title').text();
+        var tariffId = $(this).closest('.tariffs-item').find('.tariffs-item-title').attr("data-id");
+        
         var scrollWidth = $(window).outerWidth() - $(window).width();
+        
         var body = $('body');
         body.css({'padding-right': scrollWidth+'px'});
         body.addClass('open-modal');
@@ -81,7 +84,9 @@ jQuery(function($){
         var modal = $('#'+$(this).attr('data-modal'));
         modal.find('.tariff-name').text(tariffTitle);
         modal.find('input#user-tariff').val(tariffTitle);
+        modal.attr("data-id", tariffId);
         modal.addClass('before-show');
+                
         setTimeout(function() {
             modal.addClass('show');
         }, 50);
@@ -137,7 +142,8 @@ jQuery(function($){
             var data = {
                 'fullName': $("#user_name").val(),
                 'email': $("#user_email").val(),
-                'phoneNumber': $("#user-phone").val()
+                'phoneNumber': $("#user-phone").val(),
+                "tariffId" : $("#tariff-modal").attr("data-id")
             };
             
             $.ajax({
@@ -158,7 +164,7 @@ jQuery(function($){
                     } else if (r.error == "standard") {
                         $(".modal-error").append('<div class="modal-error-footer">'+r.message+'</div>');
                         $(".modal-error").removeClass("d-none");
-                    } else if (r.error == "unexcepted") {
+                    } else if (r.error == "unexpected") {
                         // тут ошибки которые связаные с кодом курса и по exception
                         $(".modal-error").removeClass("d-none");
                     }
@@ -168,6 +174,9 @@ jQuery(function($){
                 },
                 failure: function () {
                     console.log("failure")
+                },
+                complete: function () {
+                    $("#tariff-form")[0].reset();
                 }
             });
         }

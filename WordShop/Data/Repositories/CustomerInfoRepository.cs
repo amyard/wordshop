@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WordShop.Data.Interfaces;
+using WordShop.Enums;
 using WordShop.Models;
 
 namespace WordShop.Data.Repositories
@@ -34,6 +35,14 @@ namespace WordShop.Data.Repositories
         public async Task<bool> IsEmailUnique(string email)
         {
             return await _context.CustomerInfos.AnyAsync(x => x.Email == email.ToLower());
+        }
+
+        public async Task<bool> IsEmailUniqueByCourseAndTariff(string email, Courses courses, Level level, int tariffId)
+        {
+            var result = await _context.CustomerInfos.AnyAsync(x => x.Email == email.ToLower() &&
+                                                                    x.Courses == courses && 
+                                                                    x.CourseLevel == level);
+            return result;
         }
     }
 }

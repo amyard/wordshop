@@ -30,6 +30,7 @@ namespace WordShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ICustomerInfoRepository, CustomerInfoRepository>();
+            services.AddScoped<ITariffRepository, TariffRepository>();
             
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

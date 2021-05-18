@@ -21,80 +21,8 @@
 
 <body>
 
-    <header class="header">
-        <div class="container">
-            <nav class="page-nav">
-                <ul>
-                    <li><a href="#for-whom">Для кого марафон</a></li>
-                    <li><a href="#result">Результаты</a></li>
-                    <li><a href="#bonus">Бонусы</a></li>
-                    <li><a href="#schedule">Расписание</a></li>
-                    <li><a href="#tariff">Тарифы</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    @RenderBody()
 
-    
-    <main class="home">
-        @RenderBody()
-    </main>
-
-
-    <!-- modals -->
-    <div class="modal-overlay">
-        <div id="tariff-modal" class="modal modal-form" tabindex="-1" role="dialog">
-            <button type="button" class="modal-close-btn js-close-btn">Close
-                <svg class="icon-sprite svg-icon">
-                    <use xlink:href="img/symbol_sprite.svg#icon-close"></use>
-                </svg>
-            </button>
-            <div class="modal-subtitle">Тариф «<span class="tariff-name">Silver</span>»</div>
-            <h3>Марафон «Wordshop», начальный уровень</h3>
-    
-            <div class="modal-error d-none">
-                <div class="modal-error-title">Ошибка</div>
-                <div class="modal-error-text">При отправке формы возникла непредвиденная ошибка.</div>
-                <div class="modal-error-text">Попробуйте ещё раз.</div>
-            </div>
-    
-            <form id="tariff-form">
-                <div class="field">
-                    <label for="user-name">Имя</label>
-                    <input type="text" class="form-control" name="user_name" id="user_name">
-                </div>
-                <div class="field">
-                    <label for="user-email">Почта</label>
-                    <input type="email" class="form-control" name="user_email" id="user_email">
-                </div>
-                <div class="field">
-                    <label for="user-phone">Телефон</label>
-                    <span class="field-mark">Необязательное поле</span>
-                    <input type="text" class="form-control phone-input" name="user-phone" id="user-phone" placeholder="+__ (___) ___-__-__">
-                </div>
-                <input type="hidden" name="user-tariff" id="user-tariff">
-                <input type="submit" class="btn primary-btn" value="Купить">
-            </form>
-        </div>
-    
-        <div id="success-modal" class="modal success-modal" tabindex="-1" role="dialog">
-            <button type="button" class="modal-close-btn js-close-btn">Close
-                <svg class="icon-sprite svg-icon">
-                    <use xlink:href="img/symbol_sprite.svg#icon-close"></use>
-                </svg>
-            </button>
-            <div class="modal-subtitle">Тариф «<span class="tariff-name">Silver</span>»</div>
-            <h3>Марафон «Wordshop», начальный уровень</h3>
-            <div class="modal-message">
-                <div class="modal-message-title">Поздравляю! Вы стали участником марафона по-английскому</div>
-                <div class="modal-message-text">Для уточнения деталей я с вами свяжусь в ближайшее время.</div>
-            </div>
-            <a href="#schedule" class="btn primary-btn js-close-btn">К расписанию</a>
-        </div>
-    </div>
-    <!-- </modals -->
-
-    
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/svg4everybody.min.js"></script>

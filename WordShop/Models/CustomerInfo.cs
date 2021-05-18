@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using WordShop.Enums;
 
 namespace WordShop.Models
@@ -20,5 +21,9 @@ namespace WordShop.Models
         public Courses Courses { get; set; } = WordShop.Enums.Courses.WordShop;
         public Level CourseLevel { get; set; } = WordShop.Enums.Level.Beginner;
         public PaymentStatus PaymentStatus { get; set; } = WordShop.Enums.PaymentStatus.Started;
+
+        
+        public int TariffId { get; set; }
+        public Tariff Tariff { get; set; }
     }
 }
