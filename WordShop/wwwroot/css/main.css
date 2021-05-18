@@ -2280,8 +2280,6 @@ body.open-modal .modal.show
     font-size: 14px;
     line-height: 20px;
 
-    display: none;
-
     margin-bottom: 24px; 
     padding: 16px 24px 24px;
 
@@ -2612,4 +2610,14 @@ body.open-modal .modal.show
 {
     -webkit-animation: floating5 infinite ease-in-out 5.2s;
             animation: floating5 infinite ease-in-out 5.2s;
+}
+
+.d-none 
+{
+    display: none;
+}
+
+.modal-error-footer
+{
+    font-weight: 700;
 }

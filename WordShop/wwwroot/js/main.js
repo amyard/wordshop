@@ -102,34 +102,74 @@ jQuery(function($){
     $("#tariff-form").validate({
         rules: {
             user_name: {
-                required : true
+                required : true,
+                minlength : 3
             },
             user_email: {
                 required : true,
                 email : true,
+                minlength: 5,
                 regex : /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
             }
         },
         messages: {
             user_name: {
-                required : "Заполните поле"
+                required : "Заполните поле",
+                minlength: "Имя должно быть более 3-х символов"
             },
             user_email: {
                 required : "Заполните поле",
                 email : "Невалидная электронная почта",
+                minlength: "Поле должно быть более 5-ти символов",
                 regex : "Адрес должен быть вида name@domain.com"
             }
         },
         errorClass: "validate-error",
         submitHandler: function (form) {
             console.log("submitHandler");
-
-            $("#tariff-form").closest('.modal.modal-form').removeClass('before-show show');
-            $('.success-modal').addClass('before-show');
-            setTimeout(function() {
-                $('.success-modal').addClass('show');
-            }, 50);
-
+            
+            // hide 
+            if(!$(".modal-error").hasClass("d-none")) {
+                $(".modal-error").addClass("d-none");
+                $(".modal-error-footer").remove();
+            }
+            
+            var data = {
+                'fullName': $("#user_name").val(),
+                'email': $("#user_email").val(),
+                'phoneNumber': $("#user-phone").val()
+            };
+            
+            $.ajax({
+                type : "POST",
+                url : "save-customer-info",
+                dataType : "json",
+                contentType : "application/json; charset=utf-8",
+                data : JSON.stringify(data),
+                success: function (r){
+                    console.log("success ", r);
+                    
+                    if(r.success) {
+                        $("#tariff-form").closest('.modal.modal-form').removeClass('before-show show');
+                        $('.success-modal').addClass('before-show');
+                        setTimeout(function() {
+                            $('.success-modal').addClass('show');
+                        }, 50);
+                    } else if (r.error == "standard") {
+                        $(".modal-error").append('<div class="modal-error-footer">'+r.message+'</div>');
+                        $(".modal-error").removeClass("d-none");
+                    } else if (r.error == "unexcepted") {
+                        // тут ошибки которые связаные с кодом курса и по exception
+                        $(".modal-error").removeClass("d-none");
+                    }
+                },
+                error: function (r) {
+                    console.log("error ", r);
+                },
+                failure: function () {
+                    console.log("failure")
+                }
+            });
         }
     });
     

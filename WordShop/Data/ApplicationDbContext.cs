@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using WordShop.Models;
 
 namespace WordShop.Data
 {
@@ -12,5 +10,7 @@ namespace WordShop.Data
             : base(options)
         {
         }
+
+        public DbSet<CustomerInfo> CustomerInfos { get; set; }
     }
 }
