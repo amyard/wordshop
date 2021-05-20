@@ -8,12 +8,15 @@ namespace WordShop.Models
     {
         public int Id { get; set; }
         
-        [Required(ErrorMessage = "Заполните поле")]
-        [StringLength(80, ErrorMessage = "Имя должно быть более 3-х символов")]
+        [Required(ErrorMessage = "Заполните поле Имя")]
+        [StringLength(80, MinimumLength = 3, ErrorMessage = "Поле должно быть более {2}-х и меньше {1}-ти символов")]
         public string FullName { get; set; }
         
-        [Required(ErrorMessage = "Заполните поле")]
-        [StringLength(120, ErrorMessage = "Поле должно быть более 5-ти символов")]
+        [Required(ErrorMessage = "Заполните поле Почта")]
+        [StringLength(120, MinimumLength = 7, ErrorMessage = "Поле должно быть более {2}-ти и меньше {1}-ми символов")]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", 
+            ErrorMessage = "Адрес должен быть вида name@domain.com")]
         public string Email { get; set; }
         
         public string PhoneNumber { get; set; }

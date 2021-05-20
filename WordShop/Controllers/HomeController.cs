@@ -2,10 +2,13 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WordShop.Data.Interfaces;
 using WordShop.Enums;
 using WordShop.Models;
@@ -18,8 +21,9 @@ namespace WordShop.Controllers
         private readonly ICustomerInfoRepository _customerInfoRepository;
         private readonly ITariffRepository _tariffRepository;
         
-        private const string emailPattern  = @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
-
+        private const Courses course = Courses.WordShop;
+        private const Level level = Level.Beginner;
+        
         public HomeController(ILogger<HomeController> logger, ICustomerInfoRepository customerInfoRepository,
             ITariffRepository tariffRepository)
         {
@@ -43,36 +47,14 @@ namespace WordShop.Controllers
         [Route("save-customer-info")]
         public async Task<ActionResult> SaveCustomerInfoAsync([FromBody] CustomerInfoRequest customerInfoRequest)
         {
-            const Courses course = Courses.WordShop;
-            const Level level = Level.Beginner;
-            
-            // name validation
-            if (string.IsNullOrWhiteSpace(customerInfoRequest.FullName))
-                return Json(new {success = false, message = "Имя не может быть пустым", error="standard"});
-            
-            if (customerInfoRequest.FullName.Length < 3)
-                return Json(new {success = false, message = "Имя должно быть более 3-х символов", error="standard"});
-            
-            // email validation
-            if (string.IsNullOrWhiteSpace(customerInfoRequest.Email))
-                return Json(new {success = false, message = "Адрес не может быть пустым", error="standard"});
-            
-            if (customerInfoRequest.Email.Length < 5)
-                return Json(new {success = false, message = "Адрес должно быть более 5-ти символов", error="standard"});
-            
-            if (!IsEmailValid(customerInfoRequest.Email))
-                return Json(new {success = false, message = "Адрес должен быть вида name@domain.com", error="standard"});
-            
-            if (await _customerInfoRepository.IsEmailUniqueByCourseAndTariff(customerInfoRequest.Email, course, level, customerInfoRequest.TariffId))
-                return Json(new {success = false, message = "Данный адрес уже используется", error="standard"});
-            
-            // tariff validation
-            if (string.IsNullOrWhiteSpace(customerInfoRequest.TariffId.ToString()))
-                return Json(new {success = false, message = "Выберите тариф", error="standard"});
-            
-            if(!await _tariffRepository.IsTariffExists(customerInfoRequest.TariffId, course, level))
-                return Json(new {success = false, message = "Данного тарифа не существует", error="unexpected"});
-            
+            if (!ModelState.IsValid)
+                return Json( GetModelInvalidError(ModelState) );
+
+            JsonResponseResult customValidation = CheckModelValidation(customerInfoRequest);
+
+            if (!customValidation.Success)
+                return Json(customValidation);
+
             // save data
             // TODO -> move to file
             CustomerInfo customer = new CustomerInfo
@@ -96,9 +78,52 @@ namespace WordShop.Controllers
             return Json(new {success = false, message = "some error", error="unexpected"});
         }
 
-        private bool IsEmailValid(string email)
+        private JsonResponseResult GetModelInvalidError(ModelStateDictionary modelState)
         {
-            return Regex.IsMatch(email, emailPattern, RegexOptions.IgnoreCase);
+            // TODO --> override to reflection and take ordering by model column name.
+            List<string> orderedList = new List<string>(new string[] {"FullName", "Email"});
+
+            var entity = modelState
+                .Select(m => new {Order = orderedList.IndexOf(m.Key), Error = m.Value})
+                .OrderBy(m => m.Order)
+                .FirstOrDefault();
+
+            JsonResponseResult result = new JsonResponseResult
+            {
+                Success = false,
+                Message = entity.Error.Errors.FirstOrDefault().ErrorMessage,
+                Error = ErrorTypes.Standard
+            };
+            
+            return result;
+        }
+
+        private JsonResponseResult CheckModelValidation(CustomerInfoRequest customerInfoRequest)
+        {
+            bool success = true;
+            string message = "";
+            ErrorTypes error = ErrorTypes.None;
+            
+            if (_customerInfoRepository
+                .IsEmailUniqueByCourseAndTariff(customerInfoRequest.Email, course, level, customerInfoRequest.TariffId)
+                .Result)
+            {
+                (success, message, error) = (false, "Данный адрес уже используется", ErrorTypes.Standard);
+            }
+
+            if (!_tariffRepository.IsTariffExists(customerInfoRequest.TariffId, course, level).Result)
+            {
+                (success, message, error) = (false, "Данного тарифа не существует", ErrorTypes.Unexpected);
+            }
+            
+            JsonResponseResult result = new JsonResponseResult
+            {
+                Success = success,
+                Message = message,
+                Error = error
+            };
+            
+            return result;
         }
     }
 }
