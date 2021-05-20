@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<Tariff>;
 
+@section css {
+     <link href="~/css/main.css" rel="stylesheet">
+}
+
 
 <header class="header">
     <div class="container">
@@ -434,3 +438,16 @@
     </div>
 </div>
 <!-- </modals -->
+
+
+@section scripts {
+	<script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/svg4everybody.min.js"></script>
+    <script>svg4everybody();</script>
+
+    <script src="~/js/lightslider.min.js"></script>
+    <script src="~/js/maskedinput.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/main.js"></script>
+}

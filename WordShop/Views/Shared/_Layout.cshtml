@@ -11,7 +11,8 @@
     <meta name="theme-color" content="#F3556C">
     <meta name="msapplication-navbutton-color" content="#F3556C">
     <meta name="apple-mobile-web-app-capable" content="#F3556C">
-    <link href="~/css/main.css" rel="stylesheet">
+
+    @await RenderSectionAsync("css", required: false)
     
     <!-- Template Basic Images Start -->
     <link rel="icon" href="~/img/favicon/favicon.ico">
@@ -24,16 +25,6 @@
     @RenderBody()
 
     <script src="~/js/jquery.min.js"></script>
-    <script src="~/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/svg4everybody.min.js"></script>
-    <script>svg4everybody();</script>
-
-    <script src="~/js/lightslider.min.js"></script>
-    <script src="~/js/maskedinput.js"></script>
-    <script src="~/js/jquery.validate.min.js"></script>
-    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/js/main.js"></script>
-    
-    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("scripts", required: false)
 </body>
 </html>
