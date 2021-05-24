@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WordShop.Data.Interfaces;
 using WordShop.Enums;
@@ -39,6 +40,7 @@ namespace WordShop.Controllers
             return View(await _tariffRepository.GetAllTariffsAsync());
         }
         
+        [Authorize(Policy = "RequireAdminRole")]
         [Route("dashboard")]
         public IActionResult AdminDashboard()
         {

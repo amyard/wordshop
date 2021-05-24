@@ -19,8 +19,7 @@ namespace WordShop.Controllers
         [Route("get-customer-info")]
         public async Task<IActionResult> GetCustomerInformation()
         {
-            var res = await _customerInfoRepository.GetAllCustomersAsync();
-            return Json(new { data = res });
+            return Json(new { data = await _customerInfoRepository.GetAllCustomersAsync() });
         }
     }
 }

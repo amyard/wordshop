@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using WordShop.Data;
 using WordShop.Data.Interfaces;
 using WordShop.Data.Repositories;
+using WordShop.Enums;
 
 namespace WordShop
 {
@@ -38,7 +39,18 @@ namespace WordShop
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddRoleManager<RoleManager<IdentityRole>>()
+                .AddSignInManager<SignInManager<IdentityUser>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole(AppRoles.Admin.ToString()));
+                opt.AddPolicy("RequireModeratorPlusRole", policy => policy.RequireRole(AppRoles.Admin.ToString(), AppRoles.Moderator.ToString()));
+                opt.AddPolicy("RequireWordShopBeginnerRole", policy => policy.RequireRole(AppRoles.WordShopBeginner.ToString()));
+            });
+            
             services.AddControllersWithViews();
         }
 
