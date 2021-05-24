@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CustomerInfo>;
+
+@section css {
+    <link href="~/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="~/css/admin-page.css" rel="stylesheet">
+}
+
+<header class="header header-admin">
+    <div class="container">
+        <nav class="page-nav">
+            <ul>
+                <li>Дашборд</li>
+                <li>Блек-лист</li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+<main class="home mt-5">
+    <div class="container">
+        
+        <div class="p-4 border rounded">
+            <table id="tblData" class="display compact" style="width:100%">
+                <thead class="thead-dark">
+                    <tr class="table-info">
+                        <th>ID</th>
+                        <th>Имя</th>
+                        <th>Почта</th>
+                        <th>Телефон</th>
+                        <th>Тариф</th>
+                        <th>Цена</th>
+                        <th>КУРС</th>
+                        <th>Дата регистрации</th>
+                        <th>Оплата статус</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        
+    </div>
+</main>
+
+@section scripts {
+    <script src="~/js/general/jquery.dataTables.min.js"></script>
+    <script src="~/js/admin-page.js"></script>
+}

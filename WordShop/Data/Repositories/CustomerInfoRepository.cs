@@ -17,9 +17,24 @@ namespace WordShop.Data.Repositories
             _context = context;
         }
         
-        public async Task<IEnumerable<CustomerInfo>> GetAllCustomersAsync()
+        public async Task<IEnumerable<CustomerInfoDto>> GetAllCustomersAsync()
         {
-            return await _context.CustomerInfos.ToListAsync();
+            return await _context.CustomerInfos
+                .Include(t => t.Tariff)
+                .Select(x => new CustomerInfoDto
+                {
+                    Id = x.Id,
+                    FullName = x.FullName,
+                    Email = x.Email,
+                    PhoneNumber = x.PhoneNumber,
+                    TariffName = x.Tariff.Name,
+                    TariffNewPrice = "$"+x.Tariff.NewPrice.ToString(),
+                    Courses = x.Courses.ToString(),
+                    CreatedDate = x.CreatedDate.ToString("dd/MM/yyyy HH:mm:ss"),
+                    PaymentStatus = x.PaymentStatus.ToString()
+                })
+                .OrderByDescending(x => x.Id)
+                .ToListAsync();
         }
 
         public async Task SaveCustomerInfoAsync(CustomerInfo customer)

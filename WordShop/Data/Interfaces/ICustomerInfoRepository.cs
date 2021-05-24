@@ -7,7 +7,7 @@ namespace WordShop.Data.Interfaces
 {
     public interface ICustomerInfoRepository
     {
-        Task<IEnumerable<CustomerInfo>> GetAllCustomersAsync();
+        Task<IEnumerable<CustomerInfoDto>> GetAllCustomersAsync();
         Task SaveCustomerInfoAsync(CustomerInfo customer);
         Task<bool> SaveAllAsync();
         Task<bool> IsEmailUnique(string email);

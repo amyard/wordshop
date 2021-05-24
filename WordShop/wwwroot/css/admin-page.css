@@ -1,0 +1,22 @@
+﻿.header.header-admin {
+    position: relative;
+    border-bottom: 1px solid black;
+}
+
+@media screen and (min-width: 1366px) {
+    .header.header-admin .page-nav {
+        padding-top: 16px;
+    }
+}
+
+.home.mt-5 {
+    margin-top: 1rem;
+}
+
+#tblData tbody {
+    text-align: center;
+}
+
+#tblData thead tr th {
+    vertical-align: middle;
+}

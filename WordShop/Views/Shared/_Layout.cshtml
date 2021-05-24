@@ -13,6 +13,7 @@
     <meta name="apple-mobile-web-app-capable" content="#F3556C">
 
     @await RenderSectionAsync("css", required: false)
+    <link href="~/css/main.css" rel="stylesheet">
     
     <!-- Template Basic Images Start -->
     <link rel="icon" href="~/img/favicon/favicon.ico">
@@ -24,7 +25,7 @@
 
     @RenderBody()
 
-    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/general/jquery.min.js"></script>
     @await RenderSectionAsync("scripts", required: false)
 </body>
 </html>

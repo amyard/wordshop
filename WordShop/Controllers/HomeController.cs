@@ -32,9 +32,17 @@ namespace WordShop.Controllers
             _tariffRepository = tariffRepository;
         }
 
+        # region public methods
+        
         public async Task<IActionResult> Index()
         {
             return View(await _tariffRepository.GetAllTariffsAsync());
+        }
+        
+        [Route("dashboard")]
+        public IActionResult AdminDashboard()
+        {
+            return View();
         }
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -42,7 +50,7 @@ namespace WordShop.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
+        
         [HttpPost]
         [Route("save-customer-info")]
         public async Task<ActionResult> SaveCustomerInfoAsync([FromBody] CustomerInfoRequest customerInfoRequest)
@@ -77,7 +85,10 @@ namespace WordShop.Controllers
             // check on exception
             return Json(new {success = false, message = "some error", error="unexpected"});
         }
+        
+        #endregion
 
+        # region private methods
         private JsonResponseResult GetModelInvalidError(ModelStateDictionary modelState)
         {
             // TODO --> override to reflection and take ordering by model column name.
@@ -125,5 +136,7 @@ namespace WordShop.Controllers
             
             return result;
         }
+        
+        # endregion
     }
 }
