@@ -57,9 +57,9 @@ namespace WordShop
             {
                 if (!userManager.Users.Any())
                 {
-                    var admin = new IdentityUser {UserName = "delme", Email = "blackgurder1987@gmail.com"};
-                    var moderator = new IdentityUser {UserName = "delme_2", Email = "blackgurder1987_2@gmail.com"};
-                    var user = new IdentityUser {UserName = "delme_3", Email = "blackgurder1987_3@gmail.com"};
+                    var admin = new IdentityUser {UserName = "delme", Email = "blackguarder1987@gmail.com", EmailConfirmed = true};
+                    var moderator = new IdentityUser {UserName = "delme_2", Email = "blackguarder1987_2@gmail.com", EmailConfirmed = true};
+                    var user = new IdentityUser {UserName = "delme_3", Email = "blackguarder1987_3@gmail.com", EmailConfirmed = true};
                     
                     await userManager.CreateAsync(admin, "Admin123*");
                     await userManager.AddToRolesAsync(admin, new[] {AppRoles.Admin.ToString(), AppRoles.Moderator.ToString()});
