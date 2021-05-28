@@ -21,16 +21,18 @@ namespace WordShop.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ICustomerInfoRepository _customerInfoRepository;
         private readonly ITariffRepository _tariffRepository;
+        private readonly ITelegramRepository _telegram;
         
         private const Courses course = Courses.WordShop;
         private const Level level = Level.Beginner;
         
         public HomeController(ILogger<HomeController> logger, ICustomerInfoRepository customerInfoRepository,
-            ITariffRepository tariffRepository)
+            ITariffRepository tariffRepository, ITelegramRepository telegram)
         {
             _logger = logger;
             _customerInfoRepository = customerInfoRepository;
             _tariffRepository = tariffRepository;
+            _telegram = telegram;
         }
 
         # region public methods
@@ -66,7 +68,6 @@ namespace WordShop.Controllers
                 return Json(customValidation);
 
             // save data
-            // TODO -> move to file
             CustomerInfo customer = new CustomerInfo
             {
                 FullName = customerInfoRequest.FullName,
@@ -78,14 +79,15 @@ namespace WordShop.Controllers
             };
             
             await _customerInfoRepository.SaveCustomerInfoAsync(customer);
-            
-            if (await _customerInfoRepository.SaveAllAsync())
-                return Json(new {success = true, message = "work"}); 
+            await _customerInfoRepository.SaveAllAsync();
             
             // payment process
+            
             // telegram notification + email
-            // check on exception
-            return Json(new {success = false, message = "some error", error="unexpected"});
+            customer.Tariff = await _tariffRepository.GetTariffByIdAsync(customer.TariffId);
+            await _telegram.SendNewCustomerMessageToGroup(customer);
+
+            return Json(new {success = true, message = "work"}); 
         }
         
         #endregion

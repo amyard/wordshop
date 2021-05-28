@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WordShop.Data.Interfaces;
@@ -19,6 +20,11 @@ namespace WordShop.Data.Repositories
         public async Task<IEnumerable<Tariff>> GetAllTariffsAsync()
         {
             return await _context.Tariffs.ToListAsync();
+        }
+
+        public async Task<Tariff> GetTariffByIdAsync(int id)
+        {
+            return await _context.Tariffs.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task SaveTariffAsync(Tariff tariff)

@@ -8,6 +8,7 @@ namespace WordShop.Data.Interfaces
     public interface ITariffRepository
     {
         Task<IEnumerable<Tariff>> GetAllTariffsAsync();
+        Task<Tariff> GetTariffByIdAsync(int id);
         Task SaveTariffAsync(Tariff tariff);
         Task<bool> SaveAllAsync();
         Task<bool> IsTariffExists(int tariffId, Courses courses, Level level);
