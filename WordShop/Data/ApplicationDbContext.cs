@@ -17,6 +17,11 @@ namespace WordShop.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<CustomerInfo>()
+                .Property(c => c.Id)
+                .ValueGeneratedOnAdd();
+            
             builder.Entity<CustomerInfo>()
                 .HasOne(c => c.Tariff)
                 .WithMany(t => t.CustomerInfos)

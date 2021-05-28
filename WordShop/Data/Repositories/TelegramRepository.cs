@@ -39,6 +39,7 @@ namespace WordShop.Data.Repositories
                 customerInfo.Tariff.NewPrice
             );
 
+            // TODO ---> Change to senderIDs in prod.
             // long[] senderIDs = {annaChatId, devChatId, chatIdGroup};
             long[] devIDs = {devChatId};
             
@@ -75,8 +76,8 @@ namespace WordShop.Data.Repositories
 
         private string SuccessfulPaymentTemplate()
         {
-            string template = "Подписчик <b>{0}</b> оплатил тариф <b>{1}</b> в размере <b>{2}</b>." +
-                              "Номер транзакции - <b>{0}</b>";
+            string template = "Подписчик <b>{0}</b> (ID: {1}) оплатил тариф <b>{2}</b> в размере <b>{3}</b>." +
+                              "Номер транзакции - <b>{4}</b>";
 
             return template;
         }
