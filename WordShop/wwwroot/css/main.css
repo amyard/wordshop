@@ -2034,6 +2034,8 @@ a:focus
 
 .include-list
 {
+    font-weight: 600;
+    
     padding-top: 16px;
 
     border-top: 1px solid #e3e3e3;
