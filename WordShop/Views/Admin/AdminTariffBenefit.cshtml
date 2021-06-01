@@ -1,0 +1,44 @@
+﻿@section css {
+    <link href="~/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="~/css/admin-page.css" rel="stylesheet">
+}
+
+<partial name="_AdminLayout" />
+
+<main class="home mt-5">
+    <div class="container">
+        <div class="row" style="display: flex; justify-content: space-between;">
+            <div class="col-6">
+                <h2 class="text-primary">Преимущество тарифов</h2>
+            </div>
+            <div class="col-6 text-right">
+                <a class="btn btn-primary" asp-controller="Admin" asp-action="AdminTariffBenefitToggle"><i class="fas fa-plus"></i> &nbsp; Создать Преимущество</a>
+            </div>
+        </div>
+        
+        <br />
+        <div class="p-4 border rounded">
+            <table id="tblData" class="display compact" style="width:100%">
+                <thead class="thead-dark">
+                <tr class="table-info">
+                    <th>ID</th>
+                    <th>Описание</th>
+                    <th></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        
+    </div>
+</main>
+
+@section scripts {
+    <script src="~/js/general/jquery.dataTables.min.js"></script>
+    <script src="~/js/admin-page.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            loadTariffBenefitDataTable();
+        });
+    </script>
+}

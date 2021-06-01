@@ -6,10 +6,10 @@ namespace WordShop.Data.Interfaces
 {
     public interface ITariffBenefitRepository
     {
-        Task<IEnumerable<TariffBenefit>> GetTariffBenefitList();
-        Task<Tariff> GetTariffBenefit();
-        void CreateTariffBenefit();
-        void UpdateTariffBenefit();
+        Task<IEnumerable<TariffBenefit>> GetTariffBenefitsList();
+        Task<TariffBenefit> GetTariffBenefit(int id);
+        Task CreateTariffBenefit(TariffBenefit benefit);
+        Task UpdateTariffBenefit(TariffBenefit benefit);
         Task<bool> SaveAllAsync();
     }
 }

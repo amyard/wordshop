@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WordShop.Data.Interfaces;
@@ -15,24 +16,26 @@ namespace WordShop.Data.Repositories
             _context = context;
         }
         
-        public async Task<IEnumerable<TariffBenefit>> GetTariffBenefitList()
+        public async Task<IEnumerable<TariffBenefit>> GetTariffBenefitsList()
         {
             return await _context.TariffBenefits.ToListAsync();
         }
 
-        public Task<Tariff> GetTariffBenefit()
+        public async Task<TariffBenefit> GetTariffBenefit(int id)
         {
-            throw new System.NotImplementedException();
+            return await _context.TariffBenefits.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public void CreateTariffBenefit()
+        public async Task CreateTariffBenefit(TariffBenefit benefit)
         {
-            throw new System.NotImplementedException();
+            await _context.TariffBenefits.AddAsync(benefit);
         }
 
-        public void UpdateTariffBenefit()
+        public async Task UpdateTariffBenefit(TariffBenefit benefit)
         {
-            throw new System.NotImplementedException();
+            TariffBenefit tariff = await this.GetTariffBenefit(benefit.Id);
+
+            if (tariff != null) tariff.Benefit = benefit.Benefit;
         }
 
         public async Task<bool> SaveAllAsync()

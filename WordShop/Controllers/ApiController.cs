@@ -9,10 +9,13 @@ namespace WordShop.Controllers
     public class ApiController : Controller
     {
         private readonly ICustomerInfoRepository _customerInfoRepository;
+        private readonly ITariffBenefitRepository _tariffBenefitRepository;
 
-        public ApiController(ICustomerInfoRepository customerInfoRepository)
+        public ApiController(ICustomerInfoRepository customerInfoRepository, 
+            ITariffBenefitRepository tariffBenefitRepository)
         {
             _customerInfoRepository = customerInfoRepository;
+            _tariffBenefitRepository = tariffBenefitRepository;
         }
         
         [HttpGet]
@@ -20,6 +23,13 @@ namespace WordShop.Controllers
         public async Task<IActionResult> GetCustomerInformation()
         {
             return Json(new { data = await _customerInfoRepository.GetAllCustomersAsync() });
+        }
+        
+        [HttpGet]
+        [Route("get-tariff-benefits")]
+        public async Task<IActionResult> GetTariffBenefits()
+        {
+            return Json(new { data = await _tariffBenefitRepository.GetTariffBenefitsList() });
         }
     }
 }

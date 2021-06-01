@@ -1,0 +1,54 @@
+﻿@model TariffBenefit;
+
+@{
+    var title = Model.Id == 0 ? "Создать преимушество." : "Обновить запись.";
+}
+
+@section css {
+    <link href="~/css/admin-page.css" rel="stylesheet">
+}
+
+
+<partial name="_AdminLayout" />
+
+<main class="home mt-5">
+    <div class="container">
+        
+        <form method="post" class="course-start-form"
+              asp-action="AdminTariffBenefitAction" asp-controller="Admin">
+            <div class="p-3 border">
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="course-start-form__title">
+                    <h2>@title</h2>
+                </div>
+                <div class="col-8 pt-4">
+                    <div class="form-group course-start-form__data">
+                        <div class="col-4">
+                            <label>Описание преимущества</label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="Benefit" class="form-control" type="text" />
+                            <span asp-validation-for="Benefit" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row course-start-form__buttons">
+                        <div class="col-8 offset-4">
+                            <div class="row">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary form-control">Сохранить</button>
+                                </div>
+                                <div class="col">
+                                    <a asp-controller="Admin" asp-action="AdminTariffBenefit" class="btn btn-success form-control">Back to Data</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</main>
+
+@section scripts {}

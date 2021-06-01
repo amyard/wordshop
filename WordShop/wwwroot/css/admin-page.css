@@ -39,7 +39,7 @@
 .course-start-form__buttons {}
 
 .btn-primary {
-    color: #fff;
+    color: #fff !important;
     background-color: #007bff;
     border-color: #007bff;
 }
