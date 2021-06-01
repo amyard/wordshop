@@ -1,0 +1,49 @@
+﻿@model CourseStart;
+
+@section css {
+    <link href="~/css/admin-page.css" rel="stylesheet">
+}
+
+<partial name="_AdminLayout" />
+
+<main class="home mt-5">
+    <div class="container">
+        
+        <form method="post" class="course-start-form"
+              asp-action="AdminCourseStartUpdate" asp-controller="Home" asp-route-id="@Model.Id">
+            <div class="p-3 border">
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="course-start-form__title">
+                    <h2>Изменить дату начала курса.</h2>
+                </div>
+                <div class="col-8 pt-4">
+                    <div class="form-group row course-start-form__data">
+                        <div class="col-4">
+                            <label>Начало курса</label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="CourseStartDate" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                            <span asp-validation-for="CourseStartDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row course-start-form__buttons">
+                        <div class="col-8 offset-4">
+                            <div class="row">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary form-control">Сохранить</button>
+                                </div>
+                                <div class="col">
+                                    <a asp-action="AdminDashboard" class="btn btn-success form-control">Back to Dashboard</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</main>
+
+@section scripts {}

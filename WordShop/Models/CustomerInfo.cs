@@ -5,10 +5,8 @@ using WordShop.Enums;
 
 namespace WordShop.Models
 {
-    public class CustomerInfo
+    public class CustomerInfo : BaseEntity
     {
-        public int Id { get; set; }
-        
         [Required(ErrorMessage = "Заполните поле Имя")]
         [StringLength(80, MinimumLength = 3, ErrorMessage = "Поле должно быть более {2}-х и меньше {1}-ти символов")]
         public string FullName { get; set; }

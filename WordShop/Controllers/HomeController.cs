@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -22,24 +23,40 @@ namespace WordShop.Controllers
         private readonly ICustomerInfoRepository _customerInfoRepository;
         private readonly ITariffRepository _tariffRepository;
         private readonly ITelegramRepository _telegram;
-        
+        private readonly ICourseStartRepository _courseStartRepository;
+
         private const Courses course = Courses.WordShop;
         private const Level level = Level.Beginner;
         
         public HomeController(ILogger<HomeController> logger, ICustomerInfoRepository customerInfoRepository,
-            ITariffRepository tariffRepository, ITelegramRepository telegram)
+            ITariffRepository tariffRepository, ITelegramRepository telegram, 
+            ICourseStartRepository courseStartRepository)
         {
             _logger = logger;
             _customerInfoRepository = customerInfoRepository;
             _tariffRepository = tariffRepository;
             _telegram = telegram;
+            _courseStartRepository = courseStartRepository;
         }
 
         # region public methods
         
         public async Task<IActionResult> Index()
         {
-            return View(await _tariffRepository.GetAllTariffsAsync());
+            CultureInfo ruRu = new CultureInfo("ru-RU");
+            
+            var dd = _courseStartRepository.GetCourseStart();
+            var d2 = dd != null
+                ? dd.CourseStartDate.ToString("dd MMMM yyyy", ruRu)
+                : DateTime.Now.ToString("dd MMMM yyyy", ruRu);
+            
+            IndexViewModel result = new IndexViewModel
+            {
+                CourseStart = d2,
+                Tariffs = await _tariffRepository.GetAllTariffsAsync()
+            };
+            
+            return View(result);
         }
         
         [Authorize(Policy = "RequireAdminRole")]
@@ -47,6 +64,24 @@ namespace WordShop.Controllers
         public IActionResult AdminDashboard()
         {
             return View();
+        }
+        
+        [Authorize(Policy = "RequireAdminRole")]
+        [Route("course-start")]
+        public IActionResult AdminCourseStart()
+        {
+            return View(_courseStartRepository.GetCourseStart());
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AdminCourseStartUpdate(CourseStart courseStart)
+        {
+            if (ModelState.IsValid)
+            {
+                _courseStartRepository.UpdateCourseStartAsync(courseStart);
+            }
+            return RedirectToAction("AdminDashboard");
         }
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

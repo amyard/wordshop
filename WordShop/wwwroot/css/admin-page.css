@@ -25,3 +25,27 @@
 #tblData thead tr th {
     vertical-align: middle;
 }
+
+.course-start-form {}
+
+.course-start-form__title {
+    margin-bottom: 1rem;
+}
+
+.course-start-form__data {
+    margin-bottom: 1rem;
+}
+
+.course-start-form__buttons {}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-success {
+    color: #fff !important;
+    background-color: #28a745;
+    border-color: #28a745;
+}

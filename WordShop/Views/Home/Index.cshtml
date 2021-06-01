@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Tariff>;
+﻿@model IndexViewModel;
 
 <header class="header">
     <div class="container">
@@ -22,7 +22,7 @@
 				<div class="content">
 					<div class="subtitle">Марафон «Wordshop»</div>
 					<h1>Сделай первые шаги в изучении английского</h1>
-					<p>Старт марафона 25 апреля 2021</p>
+					<p>Старт марафона @Model.CourseStart</p>
 					<a href="#tariff" class="btn primary-btn">Выбрать тариф</a>
 				</div>
 				<div class="hero-img-wrap">
@@ -314,7 +314,7 @@
 
 			<div class="tariffs-block js-tariff-slider">
 				
-				@foreach (var item in Model)
+				@foreach (var item in Model.Tariffs)
 				{
 					<div class="item-wrapper">
 						<div class="tariffs-item">

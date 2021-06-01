@@ -3,9 +3,8 @@ using WordShop.Enums;
 
 namespace WordShop.Models
 {
-    public class Tariff
+    public class Tariff : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public int OldPrice { get; set; }
         public int NewPrice { get; set; }
