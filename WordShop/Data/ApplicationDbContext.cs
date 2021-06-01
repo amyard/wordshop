@@ -14,6 +14,7 @@ namespace WordShop.Data
         public DbSet<CustomerInfo> CustomerInfos { get; set; }
         public DbSet<Tariff> Tariffs { get; set; }
         public DbSet<CourseStart> CourseStarts { get; set; }
+        public DbSet<TariffBenefit> TariffBenefits { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

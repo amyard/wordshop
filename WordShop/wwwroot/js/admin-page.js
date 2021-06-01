@@ -1,14 +1,9 @@
-var dataTable;
-
-$(document).ready(function () {
-    loadDataTable();
-});
-
-
-function loadDataTable() {
+function loadCustomerInfoDataTable() {
+    var dataTable;
+    
     dataTable = $('#tblData').DataTable({
         "ajax": {
-            "url": "/api/admin/get-customer-info",
+            "url": "/api/v1/get-customer-info",
             "type": "GET",
         },
         "filter": true,

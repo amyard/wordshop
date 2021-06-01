@@ -58,38 +58,7 @@ namespace WordShop.Controllers
             
             return View(result);
         }
-        
-        [Authorize(Policy = "RequireAdminRole")]
-        [Route("dashboard")]
-        public IActionResult AdminDashboard()
-        {
-            return View();
-        }
-        
-        [Authorize(Policy = "RequireAdminRole")]
-        [Route("course-start")]
-        public IActionResult AdminCourseStart()
-        {
-            return View(_courseStartRepository.GetCourseStart());
-        }
-        
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult AdminCourseStartUpdate(CourseStart courseStart)
-        {
-            if (ModelState.IsValid)
-            {
-                _courseStartRepository.UpdateCourseStartAsync(courseStart);
-            }
-            return RedirectToAction("AdminDashboard");
-        }
-        
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-        
+
         [HttpPost]
         [Route("save-customer-info")]
         public async Task<ActionResult> SaveCustomerInfoAsync([FromBody] CustomerInfoRequest customerInfoRequest)
@@ -123,6 +92,12 @@ namespace WordShop.Controllers
             await _telegram.SendNewCustomerMessageToGroup(customer);
 
             return Json(new {success = true, message = "work"}); 
+        }
+        
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         
         #endregion

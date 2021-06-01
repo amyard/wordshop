@@ -10,7 +10,7 @@
     <div class="container">
         
         <form method="post" class="course-start-form"
-              asp-action="AdminCourseStartUpdate" asp-controller="Home" asp-route-id="@Model.Id">
+              asp-action="AdminCourseStartUpdate" asp-controller="Admin" asp-route-id="@Model.Id">
             <div class="p-3 border">
                 <div asp-validation-summary="ModelOnly"></div>
                 <div class="course-start-form__title">
@@ -34,7 +34,7 @@
                                     <button type="submit" class="btn btn-primary form-control">Сохранить</button>
                                 </div>
                                 <div class="col">
-                                    <a asp-action="AdminDashboard" class="btn btn-success form-control">Back to Dashboard</a>
+                                    <a asp-controller="Admin" asp-action="AdminDashboard" class="btn btn-success form-control">Back to Dashboard</a>
                                 </div>
                             </div>
                         </div>

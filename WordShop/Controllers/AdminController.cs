@@ -1,25 +1,41 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WordShop.Data.Interfaces;
+using WordShop.Models;
 
 namespace WordShop.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
+    [Authorize(Policy = "RequireAdminRole")]
     public class AdminController : Controller
     {
-        private readonly ICustomerInfoRepository _customerInfoRepository;
+        private readonly ICourseStartRepository _courseStartRepository;
 
-        public AdminController(ICustomerInfoRepository customerInfoRepository)
+        public AdminController(ICourseStartRepository courseStartRepository)
         {
-            _customerInfoRepository = customerInfoRepository;
+            _courseStartRepository = courseStartRepository;
         }
         
-        [HttpGet]
-        [Route("get-customer-info")]
-        public async Task<IActionResult> GetCustomerInformation()
+        [Route("dashboard")]
+        public IActionResult AdminDashboard()
         {
-            return Json(new { data = await _customerInfoRepository.GetAllCustomersAsync() });
+            return View();
+        }
+        
+        [Route("course-start")]
+        public IActionResult AdminCourseStart()
+        {
+            return View(_courseStartRepository.GetCourseStart());
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AdminCourseStartUpdate(CourseStart courseStart)
+        {
+            if (ModelState.IsValid)
+            {
+                _courseStartRepository.UpdateCourseStartAsync(courseStart);
+            }
+            return RedirectToAction("AdminDashboard");
         }
     }
 }
