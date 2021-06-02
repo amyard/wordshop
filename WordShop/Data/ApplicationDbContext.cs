@@ -15,6 +15,7 @@ namespace WordShop.Data
         public DbSet<Tariff> Tariffs { get; set; }
         public DbSet<CourseStart> CourseStarts { get; set; }
         public DbSet<TariffBenefit> TariffBenefits { get; set; }
+        public DbSet<TariffBenefitOrdered> TariffBenefitOrdered { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -29,6 +30,22 @@ namespace WordShop.Data
                 .WithMany(t => t.CustomerInfos)
                 .HasForeignKey(c => c.TariffId)
                 .HasPrincipalKey(t => t.Id);
+
+            builder.Entity<TariffBenefitOrdered>()
+                .HasOne(p => p.TariffBenefit)
+                .WithMany(t => t.TariffBenefitOrdered)
+                .HasForeignKey(t => t.TariffBenefitId)
+                .HasPrincipalKey(t => t.Id);
+
+            builder.Entity<TariffBenefitOrdered>()
+                .HasOne(t => t.AdvantageTariff)
+                .WithMany(t => t.Advantage)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            builder.Entity<TariffBenefitOrdered>()
+                .HasOne(t => t.DisadvantageTariff)
+                .WithMany(t => t.Disadvantage)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -325,49 +325,26 @@
 								</div>
 							<button type="button" class="btn primary-btn" data-modal="tariff-modal">Купить тариф</button>
 							
-							@if (item.Id == 1)
+							@if (item.Advantage.Count > 0)
 							{
 								<ul class="include-list">
-									<li>Аудио и pdf-файлы с текстом  рассказа</li>
-									<li>Видеоуроки с грамматикой</li>
-									<li>Интерактивные игры со словами</li>
-								</ul>
-								<ul class="exclude-list">
-									<li>Доступ к специальному чату с участниками</li>
-									<li>Ответы на вопросы в чате от Анны</li>
-									<li>Проверка домашних заданий</li>
-									<li>Возможность получить бонусный урок про знакомство с иностранцами</li>
-									<li>1,5 часовое индивидуальное занятие с Анной</li>
+									@foreach (var benefit in item.Advantage)
+									{
+										<li>@benefit.TariffBenefit.Benefit</li>	
+									}
 								</ul>
 							}
-							else if (item.Id == 2)
-							{
-								<ul class="include-list">
-									<li>Аудио и pdf-файлы с текстом  рассказа</li>
-									<li>Видеоуроки с грамматикой</li>
-									<li>Интерактивные игры со словами</li>
-									<li>Доступ к специальному чату с участниками</li>
-                                    <li>Ответы на вопросы в чате от Анны</li>
-                                    <li>Проверка домашних заданий</li>
-                                    <li>Возможность получить бонусный урок про знакомство с иностранцами</li>
-								</ul>
-								<ul class="exclude-list">
-									<li>1,5 часовое индивидуальное занятие с Анной</li>
-								</ul>
-							} 
-							else if (item.Id == 3)
-							{
-								<ul class="include-list">
-									<li>Аудио и pdf-файлы с текстом рассказа</li>
-									<li>Видеоуроки с грамматикой</li>
-									<li>Интерактивные игры со словами</li>
-									<li>Доступ к специальному чату с участниками</li>
-									<li>Ответы на вопросы в чате от Анны</li>
-									<li>Проверка домашних заданий</li>
-									<li>Возможность получить бонусный урок про знакомство с иностранцами</li>
-									<li>1,5 часовое индивидуальное занятие с Анной</li>
-								</ul>
-							}
+							
+							@if (item.Disadvantage.Count > 0)
+                            {
+                            	<ul class="exclude-list">
+                            		@foreach (var benefit in item.Disadvantage)
+                            		{
+                            			<li>@benefit.TariffBenefit.Benefit</li>	
+                            		}
+                            	</ul>
+                            }
+							
 						</div>
 					</div>
 				}

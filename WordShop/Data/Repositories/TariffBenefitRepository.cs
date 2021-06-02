@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WordShop.Data.Interfaces;
+using WordShop.Enums;
 using WordShop.Models;
 
 namespace WordShop.Data.Repositories

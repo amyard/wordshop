@@ -13,5 +13,8 @@ namespace WordShop.Models
         public Level Level { get; set; } = Level.Beginner;
         
         public List<CustomerInfo> CustomerInfos { get; set; }
+
+        public ICollection<TariffBenefitOrdered> Advantage { get; set; }
+        public ICollection<TariffBenefitOrdered> Disadvantage { get; set; }
     }
 }

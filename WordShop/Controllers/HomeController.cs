@@ -53,7 +53,7 @@ namespace WordShop.Controllers
             IndexViewModel result = new IndexViewModel
             {
                 CourseStart = d2,
-                Tariffs = await _tariffRepository.GetAllTariffsAsync()
+                Tariffs = await _tariffRepository.GetAllTariffsAsync(course, level)
             };
             
             return View(result);

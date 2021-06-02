@@ -2,6 +2,7 @@
 {
     public enum Level
     {
+        Default = 0,
         Beginner = 1,
         PreIntermediate = 2,
         Intermediate = 3,

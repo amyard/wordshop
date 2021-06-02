@@ -17,9 +17,15 @@ namespace WordShop.Data.Repositories
             _context = context;
         }
         
-        public async Task<IEnumerable<Tariff>> GetAllTariffsAsync()
+        public async Task<IEnumerable<Tariff>> GetAllTariffsAsync(Courses courses, Level level)
         {
-            return await _context.Tariffs.ToListAsync();
+            return await _context.Tariffs
+                .Include(t => t.Advantage.OrderBy(a => a.OrderPosition))
+                    .ThenInclude(t => t.TariffBenefit)
+                .Include(t => t.Disadvantage.OrderBy(d => d.OrderPosition))
+                    .ThenInclude(t => t.TariffBenefit)
+                .Where(t => t.Courses == courses && t.Level == level)
+                .ToListAsync();
         }
 
         public async Task<Tariff> GetTariffByIdAsync(int id)
