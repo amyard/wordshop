@@ -1,0 +1,144 @@
+﻿@model WordShop.Models.ViewModels.TariffViewModel;
+
+
+@{
+    var title = Model.Tariff.Id == 0 ? "Создать тариф." : "Обновить тариф.";
+}
+
+@section css {
+    <link href="~/css/admin-page.css" rel="stylesheet">
+}
+
+
+<partial name="_AdminLayout" />
+
+<main class="home mt-5">
+    <div class="container">
+        
+        <form method="post" class="course-start-form" asp-action="AdminTariffAction" asp-controller="Admin">
+            <div class="p-3 border">
+                <div asp-validation-summary="ModelOnly"></div>
+                <input type="hidden" asp-for="Tariff.Id" id="tariff-editor-id" />
+                <input type="hidden" asp-for="Tariff.Level" id="tariff-editor-courses" />
+                <input type="hidden" asp-for="Tariff.Courses" id="tariff-editor-level" />
+                
+                <div class="course-start-form__title">
+                    <h2>@title</h2>
+                </div>
+                <div class="col-8 pt-4">
+                    <div class="d-grid grid-80">
+                        <div>
+                            <label asp-for="Tariff.Name"></label>
+                        </div>
+                        <div>
+                            <input asp-for="Tariff.Name" class="form-control" type="text" />
+                            <span asp-validation-for="Tariff.Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid grid-80">
+                        <div>
+                            <label asp-for="Tariff.OldPrice"></label>
+                        </div>
+                        <div>
+                            <input asp-for="Tariff.OldPrice" class="form-control" type="number" />
+                            <span asp-validation-for="Tariff.OldPrice" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid grid-80">
+                        <div>
+                            <label asp-for="Tariff.NewPrice"></label>
+                        </div>
+                        <div>
+                            <input asp-for="Tariff.NewPrice" class="form-control" type="number" />
+                            <span asp-validation-for="Tariff.NewPrice" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="d-grid grid-50">
+                        <div class="tariff-data border-right">
+                            <div class="tariff-advantage">
+                                <h3>Преимущества</h3>
+                    
+                                @for (var i = 0; i < Model.Tariff.Advantage.Count; i++)
+                                {
+                                    <div class="tariff-item">
+                                        <input hidden asp-for="Tariff.Advantage[i].Id" />
+                                        <input hidden asp-for="Tariff.Advantage[i].TariffBenefit.Id" />
+                                        <div class="tariff-item__data">
+                                            <div>
+                                                Позиция
+                                                <input asp-for="Tariff.Advantage[i].OrderPosition" />
+                                            </div>
+                                            <div class="tariff-item__data-text">
+                                                <input asp-for="Tariff.Advantage[i].TariffBenefit.Benefit" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                <h3 class="mt-36">Недостатки</h3>
+                                                    
+                                @for (var i = 0; i < Model.Tariff.Disadvantage.Count; i++)
+                                {
+                                    <div class="tariff-item">
+                                        <input hidden asp-for="Tariff.Disadvantage[i].Id" />
+                                        <input hidden asp-for="Tariff.Disadvantage[i].TariffBenefit.Id" />
+                                        <div class="tariff-item__data">
+                                            <div>
+                                                Позиция
+                                                <input asp-for="Tariff.Disadvantage[i].OrderPosition" />
+                                            </div>
+                                            <div class="tariff-item__data-text">
+                                                <input asp-for="Tariff.Disadvantage[i].TariffBenefit.Benefit" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                
+                            </div>
+                        </div>
+                    
+                        <div class="all-questions">
+                            <h3 class="ml-20">Все вопросы</h3>
+                            
+                            <div class="tariff-advantage">
+                                @for (var i = 0; i < Model.TariffBenefits.Count(); i++)
+                                {
+                                    <div class="tariff-item">
+                                        <input hidden asp-for="TariffBenefits[i].Id" />
+                                        <div class="tariff-item__data">
+                                            <div class="tariff-item__data-text">
+                                                <input asp-for="TariffBenefits[i].Benefit" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group row course-start-form__buttons">
+                        <div class="col-8 offset-4">
+                            <div class="row">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary form-control">Сохранить</button>
+                                </div>
+                                <div class="col">
+                                    <a asp-controller="Admin" asp-action="AdminTariff" class="btn btn-success form-control">Вернутся к тарифам</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</main>
+
+@section scripts {}

@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using WordShop.Enums;
 
 namespace WordShop.Models
 {
     public class Tariff : BaseEntity
     {
+        [Display(Name= "Hазвание тарифа")]
         public string Name { get; set; }
+        
+        [Display(Name= "Старая цена")]
         public int OldPrice { get; set; }
+        
+        [Display(Name= "Новая цена")]
         public int NewPrice { get; set; }
         
         public Courses Courses { get; set; } = Courses.WordShop;
@@ -14,7 +20,10 @@ namespace WordShop.Models
         
         public List<CustomerInfo> CustomerInfos { get; set; }
 
-        public ICollection<TariffBenefitOrdered> Advantage { get; set; }
-        public ICollection<TariffBenefitOrdered> Disadvantage { get; set; }
+        [Display(Name= "Преимущества")]
+        public IList<TariffBenefitOrdered> Advantage { get; set; }
+        
+        [Display(Name= "Недостатки")]
+        public IList<TariffBenefitOrdered> Disadvantage { get; set; }
     }
 }

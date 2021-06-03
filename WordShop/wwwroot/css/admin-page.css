@@ -49,3 +49,51 @@
     background-color: #28a745;
     border-color: #28a745;
 }
+
+.d-grid {
+    display: grid;
+    margin-bottom: 1rem;
+}
+
+.grid-80 {
+    grid-template-columns: 20% 80%;
+}
+
+.grid-50 {
+    grid-template-columns: 50% 50%;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.border-right {
+    border-right: 1px dashed black;
+}
+
+.tariff-item {
+    border: 1px solid red;
+    padding: 6px 12px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+}
+
+.tariff-data .tariff-item {
+    margin-right: 20px;
+}
+
+.all-questions .tariff-item {
+    margin-left: 20px;
+}
+
+.tariff-item__data-text input {
+    width: 100%;
+}
+
+.mt-36 {
+    margin-top: 36px;
+}
+
+.ml-20 {
+    margin-left: 20px;
+}

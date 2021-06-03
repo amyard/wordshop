@@ -30,7 +30,13 @@ namespace WordShop.Data.Repositories
 
         public async Task<Tariff> GetTariffByIdAsync(int id)
         {
-            return await _context.Tariffs.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _context.Tariffs
+                .Include(t => t.Advantage.OrderBy(a => a.OrderPosition))
+                    .ThenInclude(t => t.TariffBenefit)
+                .Include(t => t.Disadvantage.OrderBy(d => d.OrderPosition))
+                    .ThenInclude(t => t.TariffBenefit)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
         }
 
         public async Task SaveTariffAsync(Tariff tariff)

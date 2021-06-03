@@ -1,22 +1,32 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WordShop.Data.Interfaces;
+using WordShop.Enums;
 using WordShop.Models;
+using WordShop.Models.ViewModels;
 
 namespace WordShop.Controllers
 {
     [Authorize(Policy = "RequireAdminRole")]
     public class AdminController : Controller
     {
+        private const Courses course = Courses.WordShop;
+        private const Level level = Level.Beginner;
+        
+        
         private readonly ICourseStartRepository _courseStartRepository;
         private readonly ITariffBenefitRepository _tariffBenefitRepository;
+        private readonly ITariffRepository _tariffRepository;
 
         public AdminController(ICourseStartRepository courseStartRepository,
-            ITariffBenefitRepository tariffBenefitRepository)
+            ITariffBenefitRepository tariffBenefitRepository,
+            ITariffRepository tariffRepository)
         {
             _courseStartRepository = courseStartRepository;
             _tariffBenefitRepository = tariffBenefitRepository;
+            _tariffRepository = tariffRepository;
         }
         
         [Route("dashboard")]
@@ -41,6 +51,8 @@ namespace WordShop.Controllers
             }
             return RedirectToAction("AdminDashboard");
         }
+
+        #region TariffBenefitt
         
         [Route("tariff-benefit")]
         public IActionResult AdminTariffBenefit()
@@ -74,5 +86,53 @@ namespace WordShop.Controllers
             }
             return RedirectToAction(nameof(AdminTariffBenefit));
         }
+        
+        #endregion
+        
+
+        #region TariffAction
+        
+        [Route("tariff")]
+        public async Task<IActionResult> AdminTariff()
+        {
+            return View(await _tariffRepository.GetAllTariffsAsync(course, level));
+        }
+        
+        [HttpGet]
+        [Route("tariff-action")]
+        public async Task<IActionResult> AdminTariffToggle(int? id)
+        {
+            Tariff tariff = id.HasValue
+                ? await _tariffRepository.GetTariffByIdAsync((int)id)
+                : new Tariff();
+
+            var tariffbenefit = await _tariffBenefitRepository.GetTariffBenefitsList();
+            
+            var result = new TariffViewModel
+            {
+                Tariff = tariff,
+                TariffBenefits = tariffbenefit.ToList()
+            };
+            
+            return View(result);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdminTariffAction(Tariff tariff)
+        {
+            if (ModelState.IsValid)
+            {
+                // if (tariffBenefit.Id == 0)
+                //     await _tariffBenefitRepository.CreateTariffBenefit(tariffBenefit);
+                // else
+                //     await _tariffBenefitRepository.UpdateTariffBenefit(tariffBenefit);
+                
+                await _tariffRepository.SaveAllAsync();
+            }
+            return RedirectToAction(nameof(AdminTariff));
+        }
+        
+        #endregion
     }
 }

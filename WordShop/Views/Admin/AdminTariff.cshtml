@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Tariff>;
+
+@section css {
+    <link href="~/css/admin-page.css" rel="stylesheet">
+}
+
+<partial name="_AdminLayout" />
+
+
+<main class="home">
+<section class="section-padding gradient-section tariffs-section" id="tariff">
+		<div class="container">
+			<div class="section-title">
+				<h2>Тарифы</h2>
+			</div>
+
+			<div class="tariffs-block js-tariff-slider">
+				
+				@foreach (var item in Model)
+				{
+					<div class="item-wrapper">
+						<div class="tariffs-item">
+							<div class="tariffs-item-title" data-id="@item.Id">@item.Name</div>
+							<div class="tariffs-item-price">$@item.NewPrice&nbsp;
+								<span class="old-price">/&nbsp;</span>
+								<s class="old-price">$@item.OldPrice</s>
+								</div>
+							<a asp-controller="Admin" asp-action="AdminTariffToggle" asp-route-id="@item.Id"
+								type="button" class="btn primary-btn">Редактировать тариф</a>
+							
+							@if (item.Advantage.Count > 0)
+							{
+								<ul class="include-list">
+									@foreach (var benefit in item.Advantage)
+									{
+										<li>@benefit.TariffBenefit.Benefit</li>	
+									}
+								</ul>
+							}
+							
+							@if (item.Disadvantage.Count > 0)
+                            {
+                            	<ul class="exclude-list">
+                            		@foreach (var benefit in item.Disadvantage)
+                            		{
+                            			<li>@benefit.TariffBenefit.Benefit</li>	
+                            		}
+                            	</ul>
+                            }
+							
+						</div>
+					</div>
+				}
+				
+			</div>
+
+		</div>
+	</section>
+</main>
+
+
+@section scripts {}
