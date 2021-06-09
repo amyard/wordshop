@@ -71,25 +71,6 @@
     border-right: 1px dashed black;
 }
 
-.tariff-item {
-    border: 1px solid red;
-    padding: 6px 12px;
-    border-radius: 12px;
-    margin-bottom: 8px;
-}
-
-.tariff-data .tariff-item {
-    margin-right: 20px;
-}
-
-.all-questions .tariff-item {
-    margin-left: 20px;
-}
-
-.tariff-item__data-text input {
-    width: 100%;
-}
-
 .mt-36 {
     margin-top: 36px;
 }
@@ -97,3 +78,48 @@
 .ml-20 {
     margin-left: 20px;
 }
+
+
+/*  TARIFF SECTION START  */
+
+.tariff-item {
+    border: 1px solid red;
+    padding: 2px 12px;
+    border-radius: 12px;
+    margin: 12px 0px;
+}
+
+.tariff-right-section .tariff-item {
+    margin-left: 20px;
+}
+
+.tariff-data .tariff-item {
+    margin-right: 20px;
+}
+
+.tariff-item__data-text input {
+    width: 100%;
+}
+
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.in-disadvantage p {
+    text-decoration: line-through;
+}
+
+.in-advantage p {
+    border-bottom: 1px dashed #222;
+}
+
+.drop {
+    background: linear-gradient(#eee, transparent);
+    border-radius: 4px;
+}
+
+
+/*  TARIFF SECTION END  */

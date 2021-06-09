@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,14 +20,17 @@ namespace WordShop.Controllers
         private readonly ICourseStartRepository _courseStartRepository;
         private readonly ITariffBenefitRepository _tariffBenefitRepository;
         private readonly ITariffRepository _tariffRepository;
+        private readonly ITariffBenefitOrderedRepository _tariffBenefitOrderedRepository;
 
         public AdminController(ICourseStartRepository courseStartRepository,
             ITariffBenefitRepository tariffBenefitRepository,
-            ITariffRepository tariffRepository)
+            ITariffRepository tariffRepository,
+            ITariffBenefitOrderedRepository tariffBenefitOrderedRepository)
         {
             _courseStartRepository = courseStartRepository;
             _tariffBenefitRepository = tariffBenefitRepository;
             _tariffRepository = tariffRepository;
+            _tariffBenefitOrderedRepository = tariffBenefitOrderedRepository;
         }
         
         [Route("dashboard")]
@@ -108,6 +112,12 @@ namespace WordShop.Controllers
 
             var tariffbenefit = await _tariffBenefitRepository.GetTariffBenefitsList();
             
+            if (id.HasValue)
+            {
+                var benefitsInUse = await _tariffBenefitOrderedRepository.GetBenefitsByTariffId((int)id);
+                tariffbenefit = await _tariffBenefitRepository.GetTariffBenefitsListWithoutInUseIds(benefitsInUse);
+            }
+
             var result = new TariffViewModel
             {
                 Tariff = tariff,

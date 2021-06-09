@@ -60,64 +60,67 @@
                     
                     <div class="d-grid grid-50">
                         <div class="tariff-data border-right">
-                            <div class="tariff-advantage">
+                            <div class="tariff-left-section">
                                 <h3>Преимущества</h3>
-                    
-                                @for (var i = 0; i < Model.Tariff.Advantage.Count; i++)
-                                {
-                                    <div class="tariff-item">
-                                        <input hidden asp-for="Tariff.Advantage[i].Id" />
-                                        <input hidden asp-for="Tariff.Advantage[i].TariffBenefit.Id" />
-                                        <div class="tariff-item__data">
-                                            <div>
-                                                Позиция
-                                                <input asp-for="Tariff.Advantage[i].OrderPosition" />
+                                
+                                <ul class="list-group" data-name="advantage-list">
+                                    @for (var i = 0; i < Model.Tariff.Advantage.Count; i++)
+                                    {
+                                        <li class="list-group-item" data-id="@Model.Tariff.Advantage[i].Id" draggable="true">
+                                            <div class="tariff-item">
+                                                <input hidden asp-for="Tariff.Advantage[i].Id" />
+                                                <input hidden asp-for="Tariff.Advantage[i].TariffBenefit.Id" />
+                                                <input hidden asp-for="Tariff.Advantage[i].OrderPosition" />
+                                                <div class="tariff-item__data">
+                                                    <div class="tariff-item__data-text">
+                                                        @Model.Tariff.Advantage[i].TariffBenefit.Benefit
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="tariff-item__data-text">
-                                                <input asp-for="Tariff.Advantage[i].TariffBenefit.Benefit" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
+                                        </li>
+                                    }
+                                </ul>
 
                                 <h3 class="mt-36">Недостатки</h3>
-                                                    
-                                @for (var i = 0; i < Model.Tariff.Disadvantage.Count; i++)
-                                {
-                                    <div class="tariff-item">
-                                        <input hidden asp-for="Tariff.Disadvantage[i].Id" />
-                                        <input hidden asp-for="Tariff.Disadvantage[i].TariffBenefit.Id" />
-                                        <div class="tariff-item__data">
-                                            <div>
-                                                Позиция
-                                                <input asp-for="Tariff.Disadvantage[i].OrderPosition" />
-                                            </div>
-                                            <div class="tariff-item__data-text">
-                                                <input asp-for="Tariff.Disadvantage[i].TariffBenefit.Benefit" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
                                 
+                                <ul class="list-group disadvantage-data" data-name="disadvantage-list">
+                                    @for (var i = 0; i < Model.Tariff.Disadvantage.Count; i++)
+                                    {
+                                        <li class="list-group-item" data-id="@Model.Tariff.Disadvantage[i].Id" draggable="true">
+                                            <div class="tariff-item">
+                                                <input hidden asp-for="Tariff.Disadvantage[i].Id" />
+                                                <input hidden asp-for="Tariff.Disadvantage[i].TariffBenefit.Id" />
+                                                <input hidden asp-for="Tariff.Disadvantage[i].OrderPosition" />
+                                                <div class="tariff-item__data">
+                                                    <div class="tariff-item__data-text">
+                                                        @Model.Tariff.Disadvantage[i].TariffBenefit.Benefit
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
                             </div>
                         </div>
                     
-                        <div class="all-questions">
+                        <div class="tariff-right-section">
                             <h3 class="ml-20">Все вопросы</h3>
                             
-                            <div class="tariff-advantage">
+                            <ul class="list-group" data-name="all-data-list">
                                 @for (var i = 0; i < Model.TariffBenefits.Count(); i++)
                                 {
-                                    <div class="tariff-item">
-                                        <input hidden asp-for="TariffBenefits[i].Id" />
-                                        <div class="tariff-item__data">
-                                            <div class="tariff-item__data-text">
-                                                <input asp-for="TariffBenefits[i].Benefit" />
+                                    <li class="list-group-item" data-id="@Model.TariffBenefits[i].Id" draggable="true">
+                                        <div class="tariff-item">
+                                            <input hidden asp-for="TariffBenefits[i].Id" />
+                                            <div class="tariff-item__data">
+                                                <div class="tariff-item__data-text">
+                                                    @Model.TariffBenefits[i].Benefit
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </li>
                                 }
-                            </div>
+                            </ul>
                         </div>
                     </div>
                     
@@ -134,6 +137,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </form>
@@ -141,4 +145,6 @@
     </div>
 </main>
 
-@section scripts {}
+@section scripts {
+    <script src="js/drag&drop.js"></script>
+}

@@ -22,6 +22,13 @@ namespace WordShop.Data.Repositories
             return await _context.TariffBenefits.ToListAsync();
         }
 
+        public async Task<IEnumerable<TariffBenefit>> GetTariffBenefitsListWithoutInUseIds(int[] ids)
+        {
+            return await _context.TariffBenefits
+                .Where(x => !ids.Contains(x.Id))
+                .ToListAsync();
+        }
+
         public async Task<TariffBenefit> GetTariffBenefit(int id)
         {
             return await _context.TariffBenefits.Where(x => x.Id == id).FirstOrDefaultAsync();
