@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WordShop.Models;
 using WordShop.Models.CustomerInfo;
+using WordShop.Models.DayInfo;
 using WordShop.Models.Tariff;
 
 namespace WordShop.Data
@@ -18,6 +19,10 @@ namespace WordShop.Data
         public DbSet<CourseStart> CourseStarts { get; set; }
         public DbSet<TariffBenefit> TariffBenefits { get; set; }
         public DbSet<TariffBenefitOrdered> TariffBenefitOrdered { get; set; }
+
+        public DbSet<DayInfoSequenceItem> DayInfoSequenceItems { get; set; }
+        public DbSet<DayInfoBlock> DayInfoBlocks { get; set; }
+        public DbSet<DayInfo> DayInfo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -48,6 +53,20 @@ namespace WordShop.Data
                 .HasOne(t => t.DisadvantageTariff)
                 .WithMany(t => t.Disadvantage)
                 .OnDelete(DeleteBehavior.Restrict);
+            
+            
+            
+            
+            builder.Entity<DayInfoBlock>()
+                .HasOne(d => d.DayInfo)
+                .WithMany(d => d.DayInfoBlocks)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<DayInfoBlock>()
+                .HasMany(x => x.DayInfoSequenceItems)
+                .WithOne(d => d.DayInfoBlock)
+                .HasForeignKey(d => d.DayInfoBlockId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WordShop.Data;
 using WordShop.Enums;
 using WordShop.Models;
+using WordShop.Models.DayInfo;
 using WordShop.Models.Tariff;
 
 namespace WordShop
@@ -41,6 +42,10 @@ namespace WordShop
                     await GenerateTariffBenefits(context, loggerFactory);
                     await GenerateOrderedTariffBenefits(context, loggerFactory);
                     
+                    await GenerateDayInfo(context, loggerFactory);
+                    await GenerateDayInfoBlock(context, loggerFactory);
+                    await GenerateDayInfoBlockItem(context, loggerFactory);
+                    
                     await GenerateNewRoles(roleManager, loggerFactory);
                     await GenerateNewUsers(userManager, roleManager, loggerFactory);
                     
@@ -56,6 +61,96 @@ namespace WordShop
             host.Run();
         }
 
+        private static async Task GenerateDayInfoBlockItem(ApplicationDbContext context, ILoggerFactory loggerFactory)
+        {
+            try
+            {
+                if (!context.DayInfoSequenceItems.Any())
+                {
+                    var block = new List<DayInfoSequenceItem>
+                    {
+                        new() {Text = "Видео урок 1. Разберем самый распространенный английский глагол — «to be».", DayInfoBlockId = 1},
+                        new() {Text = "Видео урок 2. Разберем структуру с помощью которой сможем описывать все что угодно — «there is, there are».", DayInfoBlockId = 1},
+                        new() {Text = "Презентации к урокам с примерами.", DayInfoBlockId = 1},
+                        new() {Text = "Узнаешь основное правило прослушивания.", DayInfoBlockId = 2},
+                        new() {Text = "Прочитаешь часть рассказа и узнаешь, как может повезти в пасмурный, дождливый день.", DayInfoBlockId = 2},
+                        new() {Text = "Игра на запоминание слов — «Сопоставление».", DayInfoBlockId = 3},
+                        
+                        new() {Text = "Видео урок 1. Разберем самый распространенный английский глагол — «to be».", DayInfoBlockId = 4},
+                        new() {Text = "Видео урок 2. Разберем структуру с помощью которой сможем описывать все что угодно — «there is, there are».", DayInfoBlockId = 4},
+                        new() {Text = "Презентации к урокам с примерами.", DayInfoBlockId = 5},
+                        new() {Text = "Узнаешь основное правило прослушивания.", DayInfoBlockId = 5},
+                        new() {Text = "Прочитаешь часть рассказа и узнаешь, как может повезти в пасмурный, дождливый день.", DayInfoBlockId = 5},
+                        new() {Text = "Игра на запоминание слов — «Сопоставление».", DayInfoBlockId = 6},
+                        
+                        new() {Text = "Видео урок 1. Разберем самый распространенный английский глагол — «to be».", DayInfoBlockId = 7},
+                        new() {Text = "Видео урок 2. Разберем структуру с помощью которой сможем описывать все что угодно — «there is, there are».", DayInfoBlockId = 8},
+                        new() {Text = "Презентации к урокам с примерами.", DayInfoBlockId = 9}
+                    };
+                    
+                    block.ForEach(t => context.DayInfoSequenceItems.AddAsync(t));
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<Program>();
+                logger.LogError(ex, "An error occured during inserting day info sequence.");
+            }
+        }
+
+        private static async Task GenerateDayInfoBlock(ApplicationDbContext context, ILoggerFactory loggerFactory)
+        {
+            try
+            {
+                if (!context.DayInfoBlocks.Any())
+                {
+                    var block = new List<DayInfoBlock>
+                    {
+                        new() {Title = "Грамматика", DayInfoId = 1},
+                        new() {Title = "Чтение", DayInfoId = 1},
+                        new() {Title = "Слова", DayInfoId = 1},
+                        
+                        new() {Title = "Грамматика", DayInfoId = 2},
+                        new() {Title = "Чтение", DayInfoId = 2},
+                        new() {Title = "Слова", DayInfoId = 2},
+                        
+                        new() {Title = "Грамматика", DayInfoId = 3},
+                        new() {Title = "Чтение", DayInfoId = 3},
+                        new() {Title = "Слова", DayInfoId = 3}
+                    };
+                    
+                    block.ForEach(t => context.DayInfoBlocks.AddAsync(t));
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<Program>();
+                logger.LogError(ex, "An error occured during inserting day info block.");
+            }
+        }
+
+        private static async Task GenerateDayInfo(ApplicationDbContext context, ILoggerFactory loggerFactory)
+        {
+            try
+            {
+                if (!context.DayInfo.Any())
+                {
+                    context.DayInfo.Add(new DayInfo {Title = "День 1", Position = 1});
+                    context.DayInfo.Add(new DayInfo {Title = "День 2", Position = 2});
+                    context.DayInfo.Add(new DayInfo {Title = "День 3", Position = 3});
+                    
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<Program>();
+                logger.LogError(ex, "An error occured during inserting day info.");
+            }
+        }
+
         private static async Task GenerateCourseStartDate(ApplicationDbContext context, ILoggerFactory loggerFactory)
         {
             try
@@ -69,7 +164,7 @@ namespace WordShop
             catch (Exception ex)
             {
                 var logger = loggerFactory.CreateLogger<Program>();
-                logger.LogError(ex, "An error occured during inserting tariff benefits.");
+                logger.LogError(ex, "An error occured during generating start date info.");
             }
         }
 

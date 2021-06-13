@@ -9,9 +9,9 @@
         
         
         public int AdvantageTariffId { get; set; }
-        public Models.Tariff.Tariff AdvantageTariff { get; set; }
+        public Tariff AdvantageTariff { get; set; }
         
         public int DisadvantageTariffId { get; set; }
-        public Models.Tariff.Tariff DisadvantageTariff { get; set; }
+        public Tariff DisadvantageTariff { get; set; }
     }
 }
