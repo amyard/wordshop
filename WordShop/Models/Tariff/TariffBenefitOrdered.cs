@@ -1,6 +1,4 @@
-﻿using WordShop.Enums;
-
-namespace WordShop.Models
+﻿namespace WordShop.Models.Tariff
 {
     public class TariffBenefitOrdered : BaseEntity
     {
@@ -11,9 +9,9 @@ namespace WordShop.Models
         
         
         public int AdvantageTariffId { get; set; }
-        public Tariff AdvantageTariff { get; set; }
+        public Models.Tariff.Tariff AdvantageTariff { get; set; }
         
         public int DisadvantageTariffId { get; set; }
-        public Tariff DisadvantageTariff { get; set; }
+        public Models.Tariff.Tariff DisadvantageTariff { get; set; }
     }
 }

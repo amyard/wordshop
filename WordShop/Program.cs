@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WordShop.Data;
 using WordShop.Enums;
 using WordShop.Models;
+using WordShop.Models.Tariff;
 
 namespace WordShop
 {
@@ -35,6 +36,7 @@ namespace WordShop
                     // add migrations if db does not exists
                     await context.Database.MigrateAsync();
 
+                    await GenerateCourseStartDate(context, loggerFactory);
                     await GenerateTariffs(context, loggerFactory);
                     await GenerateTariffBenefits(context, loggerFactory);
                     await GenerateOrderedTariffBenefits(context, loggerFactory);
@@ -52,6 +54,23 @@ namespace WordShop
             }
             
             host.Run();
+        }
+
+        private static async Task GenerateCourseStartDate(ApplicationDbContext context, ILoggerFactory loggerFactory)
+        {
+            try
+            {
+                if (!context.CourseStarts.Any())
+                {
+                    await context.CourseStarts.AddAsync(new CourseStart {Courses = Courses.WordShop, CourseStartDate = DateTime.Now.AddDays(14)});
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<Program>();
+                logger.LogError(ex, "An error occured during inserting tariff benefits.");
+            }
         }
 
         private static async Task GenerateOrderedTariffBenefits(ApplicationDbContext context, ILoggerFactory loggerFactory)

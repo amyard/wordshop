@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WordShop.Models;
+using WordShop.Models.CustomerInfo;
+using WordShop.Models.Tariff;
 
 namespace WordShop.Data
 {

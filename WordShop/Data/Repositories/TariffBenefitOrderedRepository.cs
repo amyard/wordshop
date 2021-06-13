@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WordShop.Data.Interfaces;
 using WordShop.Models;
+using WordShop.Models.Tariff;
 
 namespace WordShop.Data.Repositories
 {

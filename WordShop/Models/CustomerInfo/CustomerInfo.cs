@@ -1,11 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using WordShop.Enums;
 
-namespace WordShop.Models
+namespace WordShop.Models.CustomerInfo
 {
-    public class CustomerInfoRequest
+    public class CustomerInfo : BaseEntity
     {
         [Required(ErrorMessage = "Заполните поле Имя")]
-        [StringLength(80, MinimumLength = 3, ErrorMessage = "Поле должно быть более {2}-ти и меньше {1}-ти символов")]
+        [StringLength(80, MinimumLength = 3, ErrorMessage = "Поле должно быть более {2}-х и меньше {1}-ти символов")]
         public string FullName { get; set; }
         
         [Required(ErrorMessage = "Заполните поле Почта")]
@@ -16,8 +18,15 @@ namespace WordShop.Models
         public string Email { get; set; }
         
         public string PhoneNumber { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime? PaymentDate { get; set; }
+
+        public Courses Courses { get; set; } = WordShop.Enums.Courses.WordShop;
+        public Level CourseLevel { get; set; } = WordShop.Enums.Level.Beginner;
+        public PaymentStatus PaymentStatus { get; set; } = WordShop.Enums.PaymentStatus.Started;
+
         
-        [Required(ErrorMessage = "Выберите тариф")]
         public int TariffId { get; set; }
+        public virtual Tariff.Tariff Tariff { get; set; }
     }
 }

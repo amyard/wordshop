@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WordShop.Data.Interfaces;
 using WordShop.Enums;
 using WordShop.Models;
+using WordShop.Models.CustomerInfo;
+using WordShop.Models.ViewModels;
 
 namespace WordShop.Controllers
 {

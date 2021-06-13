@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using WordShop.Enums;
 
-namespace WordShop.Models
+namespace WordShop.Models.Tariff
 {
     public class Tariff : BaseEntity
     {
@@ -18,7 +18,7 @@ namespace WordShop.Models
         public Courses Courses { get; set; } = Courses.WordShop;
         public Level Level { get; set; } = Level.Beginner;
         
-        public List<CustomerInfo> CustomerInfos { get; set; }
+        public List<CustomerInfo.CustomerInfo> CustomerInfos { get; set; }
 
         [Display(Name= "Преимущества")]
         public IList<TariffBenefitOrdered> Advantage { get; set; }

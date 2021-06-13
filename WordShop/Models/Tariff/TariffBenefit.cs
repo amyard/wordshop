@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WordShop.Models
+namespace WordShop.Models.Tariff
 {
     public class TariffBenefit : BaseEntity
     {

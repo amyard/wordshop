@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using WordShop.Enums;
 using WordShop.Models;
+using WordShop.Models.Tariff;
 
 namespace WordShop.Data.Interfaces
 {

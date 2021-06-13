@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using WordShop.Models;
+using WordShop.Models.Tariff;
 
 namespace WordShop.Data.Interfaces
 {

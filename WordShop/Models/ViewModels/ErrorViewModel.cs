@@ -1,6 +1,4 @@
-using System;
-
-namespace WordShop.Models
+namespace WordShop.Models.ViewModels
 {
     public class ErrorViewModel
     {

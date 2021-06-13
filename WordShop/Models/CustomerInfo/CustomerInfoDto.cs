@@ -1,6 +1,4 @@
-﻿using WordShop.Enums;
-
-namespace WordShop.Models
+﻿namespace WordShop.Models.CustomerInfo
 {
     public class CustomerInfoDto
     {

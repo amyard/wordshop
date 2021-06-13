@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WordShop.Data.Interfaces;
 using WordShop.Enums;
 using WordShop.Models;
+using WordShop.Models.Tariff;
 using WordShop.Models.ViewModels;
 
 namespace WordShop.Controllers
@@ -125,10 +126,8 @@ namespace WordShop.Controllers
             };
             
             return View(result);
-        }
+        } 
         
-        // TODO ---> First save benefits. dont forget do delete old benefits before inserting new
-        // TODO ---> After save all data without Benefit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AdminTariffAction(Tariff tariff)
