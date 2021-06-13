@@ -9,6 +9,6 @@ namespace WordShop.Models.DayInfo
         public int DayInfoId { get; set; }
         public DayInfo DayInfo { get; set; }
         
-        public ICollection<DayInfoSequenceItem> DayInfoSequenceItems { get; set; }
+        public IList<DayInfoSequenceItem> DayInfoSequenceItems { get; set; }
     }
 }

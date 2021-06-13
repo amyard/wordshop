@@ -69,6 +69,7 @@ namespace WordShop
                 {
                     var block = new List<DayInfoSequenceItem>
                     {
+                        // day 1
                         new() {Text = "Видео урок 1. Разберем самый распространенный английский глагол — «to be».", DayInfoBlockId = 1},
                         new() {Text = "Видео урок 2. Разберем структуру с помощью которой сможем описывать все что угодно — «there is, there are».", DayInfoBlockId = 1},
                         new() {Text = "Презентации к урокам с примерами.", DayInfoBlockId = 1},
@@ -76,16 +77,37 @@ namespace WordShop
                         new() {Text = "Прочитаешь часть рассказа и узнаешь, как может повезти в пасмурный, дождливый день.", DayInfoBlockId = 2},
                         new() {Text = "Игра на запоминание слов — «Сопоставление».", DayInfoBlockId = 3},
                         
-                        new() {Text = "Видео урок 1. Разберем самый распространенный английский глагол — «to be».", DayInfoBlockId = 4},
-                        new() {Text = "Видео урок 2. Разберем структуру с помощью которой сможем описывать все что угодно — «there is, there are».", DayInfoBlockId = 4},
-                        new() {Text = "Презентации к урокам с примерами.", DayInfoBlockId = 5},
-                        new() {Text = "Узнаешь основное правило прослушивания.", DayInfoBlockId = 5},
-                        new() {Text = "Прочитаешь часть рассказа и узнаешь, как может повезти в пасмурный, дождливый день.", DayInfoBlockId = 5},
-                        new() {Text = "Игра на запоминание слов — «Сопоставление».", DayInfoBlockId = 6},
+                        // day 2
+                        new() {Text = "Видео урок 1. Разберем волшебные слова — вспомогательные глаголы «do» и «does».", DayInfoBlockId = 4},
+                        new() {Text = "Видео урок 2. Разберем окончание глаголов -s и -es. Почему play, а иногда plays.", DayInfoBlockId = 4},
+                        new() {Text = "Прочитаешь продолжение рассказа «Кража в магазине».", DayInfoBlockId = 5},
+                        new() {Text = "Игра на запоминание слов — «Найди пару».", DayInfoBlockId = 6},
                         
-                        new() {Text = "Видео урок 1. Разберем самый распространенный английский глагол — «to be».", DayInfoBlockId = 7},
-                        new() {Text = "Видео урок 2. Разберем структуру с помощью которой сможем описывать все что угодно — «there is, there are».", DayInfoBlockId = 8},
-                        new() {Text = "Презентации к урокам с примерами.", DayInfoBlockId = 9}
+                        // day 3
+                        new() {Text = "Видео урок 1. Разберем волшебные слова — вспомогательные глаголы «do» и «does».", DayInfoBlockId = 7},
+                        new() {Text = "Видео урок 2. Разберем окончание глаголов -s и -es. Почему play, а иногда plays.", DayInfoBlockId = 7},
+                        new() {Text = "Прочитаешь продолжение рассказа «Кража в магазине».", DayInfoBlockId = 8},
+                        new() {Text = "Игра на запоминание слов — «Найди пару».", DayInfoBlockId = 9},
+                        
+                        // day 4
+                        new() {Text = "Видео урок «Есть только миг между прошлым и будущим». Именно он называется Present Continuous.", DayInfoBlockId = 10},
+                        new() {Text = "Продолжаем читать рассказ «Что он хочет этот странный незнакомец?».", DayInfoBlockId = 11},
+                        new() {Text = "Игра на запоминание слов — «Викторина».", DayInfoBlockId = 12},
+                        
+                        // day 5
+                        new() {Text = "Видео урок «Управляем будущим — going to».", DayInfoBlockId = 13},
+                        new() {Text = "Читаем дальше «Странное стечение обстоятельств , кража в магазине удача?».", DayInfoBlockId = 14},
+                        new() {Text = "Игра на запоминание слов — «Составление пар».", DayInfoBlockId = 15},
+                        
+                        // day 6
+                        new() {Text = "Сикретики множественного числа.", DayInfoBlockId = 16},
+                        new() {Text = "Заканчиваем читать рассказ «Незнакомец оказался не так уж и плох».", DayInfoBlockId = 17},
+                        new() {Text = "Игра на запоминание слов — «Поиск слов».", DayInfoBlockId = 18},
+                        
+                        // day 7
+                        new() {Text = "Запоминаем на ура эти сложные слова — this, these, that и those.", DayInfoBlockId = 19},
+                        new() {Text = "Прочитаешь последнюю часть рассказа «неожиданная втреча».", DayInfoBlockId = 20},
+                        new() {Text = "Игра на запоминание слов — «Открой поле».", DayInfoBlockId = 21}
                     };
                     
                     block.ForEach(t => context.DayInfoSequenceItems.AddAsync(t));
@@ -117,7 +139,23 @@ namespace WordShop
                         
                         new() {Title = "Грамматика", DayInfoId = 3},
                         new() {Title = "Чтение", DayInfoId = 3},
-                        new() {Title = "Слова", DayInfoId = 3}
+                        new() {Title = "Слова", DayInfoId = 3},
+                        
+                        new() {Title = "Грамматика", DayInfoId = 4},
+                        new() {Title = "Чтение", DayInfoId = 4},
+                        new() {Title = "Слова", DayInfoId = 4},
+                        
+                        new() {Title = "Грамматика", DayInfoId = 5},
+                        new() {Title = "Чтение", DayInfoId = 5},
+                        new() {Title = "Слова", DayInfoId = 5},
+                        
+                        new() {Title = "Грамматика", DayInfoId = 6},
+                        new() {Title = "Чтение", DayInfoId = 6},
+                        new() {Title = "Слова", DayInfoId = 6},
+                        
+                        new() {Title = "Грамматика", DayInfoId = 7},
+                        new() {Title = "Чтение", DayInfoId = 7},
+                        new() {Title = "Слова", DayInfoId = 7}
                     };
                     
                     block.ForEach(t => context.DayInfoBlocks.AddAsync(t));
@@ -140,6 +178,10 @@ namespace WordShop
                     context.DayInfo.Add(new DayInfo {Title = "День 1", Position = 1});
                     context.DayInfo.Add(new DayInfo {Title = "День 2", Position = 2});
                     context.DayInfo.Add(new DayInfo {Title = "День 3", Position = 3});
+                    context.DayInfo.Add(new DayInfo {Title = "День 4", Position = 4});
+                    context.DayInfo.Add(new DayInfo {Title = "День 5", Position = 5});
+                    context.DayInfo.Add(new DayInfo {Title = "День 6", Position = 6});
+                    context.DayInfo.Add(new DayInfo {Title = "День 7", Position = 7});
                     
                     await context.SaveChangesAsync();
                 }

@@ -6,5 +6,6 @@ namespace WordShop.Models.ViewModels
     {
         public string CourseStart { get; set; }
         public IEnumerable<Tariff.Tariff> Tariffs { get; set; }
+        public IEnumerable<DayInfo.DayInfo> DayInfos { get; set; }
     }
 }

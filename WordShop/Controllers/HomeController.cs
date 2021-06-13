@@ -26,19 +26,22 @@ namespace WordShop.Controllers
         private readonly ITariffRepository _tariffRepository;
         private readonly ITelegramRepository _telegram;
         private readonly ICourseStartRepository _courseStartRepository;
+        private readonly IDayInfoRepository _dayInfoRepository;
 
         private const Courses course = Courses.WordShop;
         private const Level level = Level.Beginner;
         
         public HomeController(ILogger<HomeController> logger, ICustomerInfoRepository customerInfoRepository,
             ITariffRepository tariffRepository, ITelegramRepository telegram, 
-            ICourseStartRepository courseStartRepository)
+            ICourseStartRepository courseStartRepository,
+            IDayInfoRepository dayInfoRepository)
         {
             _logger = logger;
             _customerInfoRepository = customerInfoRepository;
             _tariffRepository = tariffRepository;
             _telegram = telegram;
             _courseStartRepository = courseStartRepository;
+            _dayInfoRepository = dayInfoRepository;
         }
 
         # region public methods
@@ -47,15 +50,16 @@ namespace WordShop.Controllers
         {
             CultureInfo ruRu = new CultureInfo("ru-RU");
             
-            var dd = _courseStartRepository.GetCourseStart();
-            var d2 = dd != null
-                ? dd.CourseStartDate.ToString("dd MMMM yyyy", ruRu)
+            var startDateFromDB = _courseStartRepository.GetCourseStart();
+            var startDate = startDateFromDB != null
+                ? startDateFromDB.CourseStartDate.ToString("dd MMMM yyyy", ruRu)
                 : DateTime.Now.ToString("dd MMMM yyyy", ruRu);
             
             IndexViewModel result = new IndexViewModel
             {
-                CourseStart = d2,
-                Tariffs = await _tariffRepository.GetAllTariffsAsync(course, level)
+                CourseStart = startDate,
+                Tariffs = await _tariffRepository.GetAllTariffsAsync(course, level),
+                DayInfos = await _dayInfoRepository.GetListOfDayInfosAsync()
             };
             
             return View(result);

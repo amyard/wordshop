@@ -184,122 +184,122 @@
 		<div class="container-clear-right">
 			<div class="slider-day js-slider-day">
 
-				<div class="slider-day-item">
-					<div class="slider-item-title">День №1</div>
-					<div class="slider-item-subtitle">Грамматика</div>
-					<ul>
-						<li>Видео урок 1. Разберем самый распространенный английский глагол — «to be».</li>
-						<li>Видео урок 2. Разберем структуру с помощью которой сможем описывать все что угодно — «there is, there are».</li>
-						<li>Презентации к урокам с примерами.</li>
-					</ul>
-					<div class="slider-item-subtitle">Чтение</div>
-					<ul>
-						<li>Узнаешь основное правило прослушивания.</li>
-						<li>Прочитаешь часть рассказа и узнаешь, как может повезти в пасмурный, дождливый день.</li>
-					</ul>
-					<div class="slider-item-subtitle">Слова</div>
-					<ul>
-						<li>Игра на запоминание слов — «Сопоставление».</li>
-					</ul>
-				</div>
-
-				<div class="slider-day-item">
-					<div class="slider-item-title">День №2</div>
-					<div class="slider-item-subtitle">Грамматика</div>
-					<ul>
-						<li>Видео урок 1. Разберем волшебные слова — вспомогательные глаголы «do» и «does».</li>
-						<li>Видео урок 2. Разберем окончание глаголов -s и -es. Почему play, а иногда plays.</li>
-					</ul>
-					<div class="slider-item-subtitle">Чтение</div>
-					<ul>
-						<li>Прочитаешь продолжение рассказа «Кража в магазине».</li>
-					</ul>
-					<div class="slider-item-subtitle">Слова</div>
-					<ul>
-						<li>Игра на запоминание слов — «Найди пару».</li>
-					</ul>
-				</div>
-
-				<div class="slider-day-item">
-					<div class="slider-item-title">День №3</div>
-					<div class="slider-item-subtitle">Грамматика</div>
-					<ul>
-						<li>Видео урок 1. Разберем волшебные слова — вспомогательные глаголы «do» и «does».</li>
-						<li>Видео урок 2. Разберем окончание глаголов -s и -es. Почему play, а иногда plays.</li>
-					</ul>
-					<div class="slider-item-subtitle">Чтение</div>
-					<ul>
-						<li>Прочитаешь продолжение рассказа «Кража в магазине».</li>
-					</ul>
-					<div class="slider-item-subtitle">Слова</div>
-					<ul>
-						<li>Игра на запоминание слов — «Найди пару».</li>
-					</ul>
-				</div>
-
-				<div class="slider-day-item">
-					<div class="slider-item-title">День №4</div>
-					<div class="slider-item-subtitle">Грамматика</div>
-					<ul>
-						<li>Видео урок «Есть только миг между прошлым и будущим». Именно он называется Present Continuous.</li>
-					</ul>
-					<div class="slider-item-subtitle">Чтение</div>
-					<ul>
-						<li>Продолжаем читать рассказ «Что он хочет этот странный незнакомец?».</li>
-					</ul>
-					<div class="slider-item-subtitle">Слова</div>
-					<ul>
-						<li>Игра на запоминание слов — «Викторина».</li>
-					</ul>
-				</div>
-
-				<div class="slider-day-item">
-					<div class="slider-item-title">День №5</div>
-					<div class="slider-item-subtitle">Грамматика</div>
-					<ul>
-						<li>Видео урок «Управляем будущим — going to».</li>
-					</ul>
-					<div class="slider-item-subtitle">Чтение</div>
-					<ul>
-						<li>Читаем дальше «Странное стечение обстоятельств , кража в магазине удача?».</li>
-					</ul>
-					<div class="slider-item-subtitle">Слова</div>
-					<ul>
-						<li>Игра на запоминание слов — «Составление пар».</li>
-					</ul>
-				</div>
-
-				<div class="slider-day-item">
-					<div class="slider-item-title">День №6</div>
-					<div class="slider-item-subtitle">Грамматика</div>
-					<ul>
-						<li>Сикретики множественного числа.</li>
-					</ul>
-					<div class="slider-item-subtitle">Чтение</div>
-					<ul>
-						<li>Заканчиваем читать рассказ «Незнакомец оказался не так уж и плох».</li>
-					</ul>
-					<div class="slider-item-subtitle">Слова</div>
-					<ul>
-						<li>Игра на запоминание слов — «Поиск слов».</li>
-					</ul>
-				</div>
-
-				<div class="slider-day-item">
-					<div class="slider-item-title">День №7</div>
-					<div class="slider-item-subtitle">Грамматика</div>
-					<ul>
-						<li>Запоминаем на ура эти сложные слова — this, these, that и those.</li>
-					</ul>
-					<div class="slider-item-subtitle">Чтение</div>
-					<ul>
-						<li>Прочитаешь последнюю часть рассказа «неожиданная втреча».</li>
-					</ul>
-					<div class="slider-item-subtitle">Слова</div>
-					<ul>	
-						<li>Игра на запоминание слов — «Открой поле».</li>
-					</ul>
-				</div>
+				@foreach(var dayItem in Model.DayInfos)
+				{
+					<div class="slider-day-item">
+						<div class="slider-item-title">@dayItem.Title</div>
+						
+						@foreach(var dayBlock in dayItem.DayInfoBlocks)
+						{
+							<div class="slider-item-subtitle">@dayBlock.Title</div>
+							<ul>
+								@foreach(var daySeq in dayBlock.DayInfoSequenceItems)
+								{
+									<li>@daySeq.Text</li>
+								}
+							</ul>
+						}
+						
+					</div>
+				}
+					
+				@* <div class="slider-day-item"> *@
+				@* 	<div class="slider-item-title">День №2</div> *@
+				@* 	<div class="slider-item-subtitle">Грамматика</div> *@
+				@* 	<ul> *@
+				@* 		<li>Видео урок 1. Разберем волшебные слова — вспомогательные глаголы «do» и «does».</li> *@
+				@* 		<li>Видео урок 2. Разберем окончание глаголов -s и -es. Почему play, а иногда plays.</li> *@
+				@* 	</ul> *@
+				@* 	<div class="slider-item-subtitle">Чтение</div> *@
+				@* 	<ul> *@
+				@* 		<li>Прочитаешь продолжение рассказа «Кража в магазине».</li> *@
+				@* 	</ul> *@
+				@* 	<div class="slider-item-subtitle">Слова</div> *@
+				@* 	<ul> *@
+				@* 		<li>Игра на запоминание слов — «Найди пару».</li> *@
+				@* 	</ul> *@
+				@* </div> *@
+				@* *@
+				@* <div class="slider-day-item"> *@
+				@* 	<div class="slider-item-title">День №3</div> *@
+				@* 	<div class="slider-item-subtitle">Грамматика</div> *@
+				@* 	<ul> *@
+				@* 		<li>Видео урок 1. Разберем волшебные слова — вспомогательные глаголы «do» и «does».</li> *@
+				@* 		<li>Видео урок 2. Разберем окончание глаголов -s и -es. Почему play, а иногда plays.</li> *@
+				@* 	</ul> *@
+				@* 	<div class="slider-item-subtitle">Чтение</div> *@
+				@* 	<ul> *@
+				@* 		<li>Прочитаешь продолжение рассказа «Кража в магазине».</li> *@
+				@* 	</ul> *@
+				@* 	<div class="slider-item-subtitle">Слова</div> *@
+				@* 	<ul> *@
+				@* 		<li>Игра на запоминание слов — «Найди пару».</li> *@
+				@* 	</ul> *@
+				@* </div> *@
+				@* *@
+				@* <div class="slider-day-item"> *@
+				@* 	<div class="slider-item-title">День №4</div> *@
+				@* 	<div class="slider-item-subtitle">Грамматика</div> *@
+				@* 	<ul> *@
+				@* 		<li>Видео урок «Есть только миг между прошлым и будущим». Именно он называется Present Continuous.</li> *@
+				@* 	</ul> *@
+				@* 	<div class="slider-item-subtitle">Чтение</div> *@
+				@* 	<ul> *@
+				@* 		<li>Продолжаем читать рассказ «Что он хочет этот странный незнакомец?».</li> *@
+				@* 	</ul> *@
+				@* 	<div class="slider-item-subtitle">Слова</div> *@
+				@* 	<ul> *@
+				@* 		<li>Игра на запоминание слов — «Викторина».</li> *@
+				@* 	</ul> *@
+				@* </div> *@
+				@* *@
+				@* <div class="slider-day-item"> *@
+				@* 	<div class="slider-item-title">День №5</div> *@
+				@* 	<div class="slider-item-subtitle">Грамматика</div> *@
+				@* 	<ul> *@
+				@* 		<li>Видео урок «Управляем будущим — going to».</li> *@
+				@* 	</ul> *@
+				@* 	<div class="slider-item-subtitle">Чтение</div> *@
+				@* 	<ul> *@
+				@* 		<li>Читаем дальше «Странное стечение обстоятельств , кража в магазине удача?».</li> *@
+				@* 	</ul> *@
+				@* 	<div class="slider-item-subtitle">Слова</div> *@
+				@* 	<ul> *@
+				@* 		<li>Игра на запоминание слов — «Составление пар».</li> *@
+				@* 	</ul> *@
+				@* </div> *@
+				@* *@
+				@* <div class="slider-day-item"> *@
+				@* 	<div class="slider-item-title">День №6</div> *@
+				@* 	<div class="slider-item-subtitle">Грамматика</div> *@
+				@* 	<ul> *@
+				@* 		<li>Сикретики множественного числа.</li> *@
+				@* 	</ul> *@
+				@* 	<div class="slider-item-subtitle">Чтение</div> *@
+				@* 	<ul> *@
+				@* 		<li>Заканчиваем читать рассказ «Незнакомец оказался не так уж и плох».</li> *@
+				@* 	</ul> *@
+				@* 	<div class="slider-item-subtitle">Слова</div> *@
+				@* 	<ul> *@
+				@* 		<li>Игра на запоминание слов — «Поиск слов».</li> *@
+				@* 	</ul> *@
+				@* </div> *@
+				@* *@
+				@* <div class="slider-day-item"> *@
+				@* 	<div class="slider-item-title">День №7</div> *@
+				@* 	<div class="slider-item-subtitle">Грамматика</div> *@
+				@* 	<ul> *@
+				@* 		<li>Запоминаем на ура эти сложные слова — this, these, that и those.</li> *@
+				@* 	</ul> *@
+				@* 	<div class="slider-item-subtitle">Чтение</div> *@
+				@* 	<ul> *@
+				@* 		<li>Прочитаешь последнюю часть рассказа «неожиданная втреча».</li> *@
+				@* 	</ul> *@
+				@* 	<div class="slider-item-subtitle">Слова</div> *@
+				@* 	<ul>	 *@
+				@* 		<li>Игра на запоминание слов — «Открой поле».</li> *@
+				@* 	</ul> *@
+				@* </div> *@
 
 			</div>
 			<div class="slider-day-nav"></div>
