@@ -12,5 +12,6 @@ namespace WordShop.Data.Interfaces
         Task SaveTariffAsync(Tariff tariff);
         Task<bool> SaveAllAsync();
         Task<bool> IsTariffExists(int tariffId, Courses courses, Level level);
+        Task UpdateTariffAsync(Tariff tariff);
     }
 }

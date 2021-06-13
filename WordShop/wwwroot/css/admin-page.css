@@ -26,8 +26,6 @@
     vertical-align: middle;
 }
 
-.course-start-form {}
-
 .course-start-form__title {
     margin-bottom: 1rem;
 }
@@ -121,5 +119,11 @@
     border-radius: 4px;
 }
 
+.list-group {
+    min-height: 100px;
+    height: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
 
 /*  TARIFF SECTION END  */

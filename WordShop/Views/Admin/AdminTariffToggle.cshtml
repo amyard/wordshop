@@ -15,7 +15,7 @@
 <main class="home mt-5">
     <div class="container">
         
-        <form method="post" class="course-start-form" asp-action="AdminTariffAction" asp-controller="Admin">
+        <form method="post" id="course-start-form" asp-action="AdminTariffAction" asp-controller="Admin">
             <div class="p-3 border">
                 <div asp-validation-summary="ModelOnly"></div>
                 <input type="hidden" asp-for="Tariff.Id" id="tariff-editor-id" />
@@ -63,13 +63,14 @@
                             <div class="tariff-left-section">
                                 <h3>Преимущества</h3>
                                 
-                                <ul class="list-group" data-name="advantage-list">
+                                <ul class="list-group advantage-data" data-name="advantage-list">
                                     @for (var i = 0; i < Model.Tariff.Advantage.Count; i++)
                                     {
-                                        <li class="list-group-item" data-id="@Model.Tariff.Advantage[i].Id" draggable="true">
+                                        var dataID = i + 11;
+                                        <li class="list-group-item" data-id="@dataID" draggable="true">
                                             <div class="tariff-item">
                                                 <input hidden asp-for="Tariff.Advantage[i].Id" />
-                                                <input hidden asp-for="Tariff.Advantage[i].TariffBenefit.Id" />
+                                                <input hidden asp-for="Tariff.Advantage[i].TariffBenefit.Id" class="item-tariff-id" />
                                                 <input hidden asp-for="Tariff.Advantage[i].OrderPosition" />
                                                 <div class="tariff-item__data">
                                                     <div class="tariff-item__data-text">
@@ -86,10 +87,11 @@
                                 <ul class="list-group disadvantage-data" data-name="disadvantage-list">
                                     @for (var i = 0; i < Model.Tariff.Disadvantage.Count; i++)
                                     {
-                                        <li class="list-group-item" data-id="@Model.Tariff.Disadvantage[i].Id" draggable="true">
+                                        var dataID = i + 33;
+                                        <li class="list-group-item" data-id="@dataID" draggable="true">
                                             <div class="tariff-item">
                                                 <input hidden asp-for="Tariff.Disadvantage[i].Id" />
-                                                <input hidden asp-for="Tariff.Disadvantage[i].TariffBenefit.Id" />
+                                                <input hidden asp-for="Tariff.Disadvantage[i].TariffBenefit.Id" class="item-tariff-id" />
                                                 <input hidden asp-for="Tariff.Disadvantage[i].OrderPosition" />
                                                 <div class="tariff-item__data">
                                                     <div class="tariff-item__data-text">
@@ -109,9 +111,10 @@
                             <ul class="list-group" data-name="all-data-list">
                                 @for (var i = 0; i < Model.TariffBenefits.Count(); i++)
                                 {
-                                    <li class="list-group-item" data-id="@Model.TariffBenefits[i].Id" draggable="true">
+                                    var dataID = i + 55;
+                                    <li class="list-group-item" data-id="@dataID" draggable="true">
                                         <div class="tariff-item">
-                                            <input hidden asp-for="TariffBenefits[i].Id" />
+                                            <input hidden asp-for="TariffBenefits[i].Id" class="item-tariff-id" />
                                             <div class="tariff-item__data">
                                                 <div class="tariff-item__data-text">
                                                     @Model.TariffBenefits[i].Benefit
@@ -129,7 +132,7 @@
                         <div class="col-8 offset-4">
                             <div class="row">
                                 <div class="col">
-                                    <button type="submit" class="btn btn-primary form-control">Сохранить</button>
+                                    <button type="submit" class="btn btn-primary form-control save-data">Сохранить</button>
                                 </div>
                                 <div class="col">
                                     <a asp-controller="Admin" asp-action="AdminTariff" class="btn btn-success form-control">Вернутся к тарифам</a>
@@ -147,4 +150,5 @@
 
 @section scripts {
     <script src="js/drag&drop.js"></script>
+    <script src="js/tariff.js"></script>
 }

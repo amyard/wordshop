@@ -127,22 +127,20 @@ namespace WordShop.Controllers
             return View(result);
         }
         
+        // TODO ---> First save benefits. dont forget do delete old benefits before inserting new
+        // TODO ---> After save all data without Benefit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AdminTariffAction(Tariff tariff)
         {
             if (ModelState.IsValid)
             {
-                // if (tariffBenefit.Id == 0)
-                //     await _tariffBenefitRepository.CreateTariffBenefit(tariffBenefit);
-                // else
-                //     await _tariffBenefitRepository.UpdateTariffBenefit(tariffBenefit);
+                await _tariffRepository.UpdateTariffAsync(tariff);
                 
                 await _tariffRepository.SaveAllAsync();
             }
             return RedirectToAction(nameof(AdminTariff));
         }
-        
         #endregion
     }
 }

@@ -53,5 +53,14 @@ namespace WordShop.Data.Repositories
         {
             return await _context.Tariffs.AnyAsync(t => t.Id == tariffId && t.Courses == courses && t.Level == level);
         }
+
+        public async Task UpdateTariffAsync(Tariff tariff)
+        {
+            var tariffFromDB = await _context.Tariffs.Where(x => x.Id == tariff.Id).FirstOrDefaultAsync();
+
+            tariffFromDB.Name = tariff.Name;
+            tariffFromDB.OldPrice = tariff.OldPrice;
+            tariffFromDB.NewPrice = tariff.NewPrice;
+        }
     }
 }
