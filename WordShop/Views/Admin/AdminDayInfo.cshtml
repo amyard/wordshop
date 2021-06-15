@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WordShop.Models.DayInfo.DayInfo>;
+
+@section css {
+    <link href="~/css/admin-page.css" rel="stylesheet">
+}
+
+<partial name="_AdminLayout" />
+
+<main class="home">
+	<section class="section-padding" id="schedule">
+		<div class="container-clear-right">
+			<div class="container">
+				<h3><a class="btn btn-success">Добавить день</a></h3>
+			</div>
+			
+			<div class="slider-day js-slider-day">
+
+				@foreach (var dayItem in Model)
+				{
+					<div class="slider-day-item">
+						<div class="slider-item-title">@dayItem.Title</div>
+
+						@foreach (var dayBlock in dayItem.DayInfoBlocks)
+						{
+							<div class="slider-item-subtitle">@dayBlock.Title</div>
+							<ul>
+								@foreach (var daySeq in dayBlock.DayInfoSequenceItems)
+								{
+									<li>@daySeq.Text</li>
+								}
+							</ul>
+						}
+						
+						<div class="slider-action-btn">
+                        	<a href="" class="btn btn-success">Редактировать</a>
+                        	<a href="" class="btn btn-primary ml-5">Удалить</a>
+                        </div>
+					</div>
+				}
+			</div>
+			<div class="slider-day-nav"></div>
+		</div>
+	</section>
+</main>
+
+@section scripts {
+	<script src="~/js/general/bootstrap.bundle.min.js"></script>
+	<script src="~/js/general/lightslider.min.js"></script>
+    <script src="~/js/main.js"></script>
+}

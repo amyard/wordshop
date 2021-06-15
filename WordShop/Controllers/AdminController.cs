@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WordShop.Data.Interfaces;
 using WordShop.Enums;
 using WordShop.Models;
+using WordShop.Models.DayInfo;
 using WordShop.Models.Tariff;
 using WordShop.Models.ViewModels;
 
@@ -22,16 +23,19 @@ namespace WordShop.Controllers
         private readonly ITariffBenefitRepository _tariffBenefitRepository;
         private readonly ITariffRepository _tariffRepository;
         private readonly ITariffBenefitOrderedRepository _tariffBenefitOrderedRepository;
+        private readonly IDayInfoRepository _dayInfoRepository;
 
         public AdminController(ICourseStartRepository courseStartRepository,
             ITariffBenefitRepository tariffBenefitRepository,
             ITariffRepository tariffRepository,
-            ITariffBenefitOrderedRepository tariffBenefitOrderedRepository)
+            ITariffBenefitOrderedRepository tariffBenefitOrderedRepository,
+            IDayInfoRepository dayInfoRepository)
         {
             _courseStartRepository = courseStartRepository;
             _tariffBenefitRepository = tariffBenefitRepository;
             _tariffRepository = tariffRepository;
             _tariffBenefitOrderedRepository = tariffBenefitOrderedRepository;
+            _dayInfoRepository = dayInfoRepository;
         }
         
         [Route("dashboard")]
@@ -139,6 +143,14 @@ namespace WordShop.Controllers
                 await _tariffRepository.SaveAllAsync();
             }
             return RedirectToAction(nameof(AdminTariff));
+        }
+        #endregion
+
+
+        #region  dayinfo
+        public async Task<ActionResult> AdminDayInfo()
+        {
+            return View(await _dayInfoRepository.GetListOfDayInfosAsync());
         }
         #endregion
     }
