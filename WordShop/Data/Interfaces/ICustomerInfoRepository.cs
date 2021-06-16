@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using WordShop.Enums;
-using WordShop.Models;
 using WordShop.Models.CustomerInfo;
+using WordShop.Models.DTOs;
 
 namespace WordShop.Data.Interfaces
 {

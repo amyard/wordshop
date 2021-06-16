@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WordShop.Data.Interfaces;
 using WordShop.Enums;
-using WordShop.Models;
 using WordShop.Models.CustomerInfo;
+using WordShop.Models.DTOs;
 
 namespace WordShop.Data.Repositories
 {

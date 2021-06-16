@@ -3,8 +3,6 @@
     $("#course-start-form").on("submit", function(event){
         event.preventDefault();
 
-        console.log("preventDefault")
-
         var advantage = $(".advantage-data .tariff-item");
         var disadvantage = $(".disadvantage-data .tariff-item");
 

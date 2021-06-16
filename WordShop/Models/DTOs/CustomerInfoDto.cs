@@ -1,4 +1,4 @@
-﻿namespace WordShop.Models.CustomerInfo
+﻿namespace WordShop.Models.DTOs
 {
     public class CustomerInfoDto
     {

@@ -48,6 +48,12 @@
     border-color: #28a745;
 }
 
+.btn-danger {
+    color: #fff !important;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
 .d-grid {
     display: grid;
     margin-bottom: 1rem;
@@ -81,6 +87,9 @@
     margin-left: 5px;
 }
 
+.mb-5 {
+    margin-bottom: 5px !important;
+}
 
 /*  TARIFF SECTION START  */
 
@@ -141,5 +150,39 @@
 .slider-day-item .slider-action-btn {
     position: absolute;
     bottom: 12px;
+}
+
+.day-info-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-additional-block {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.grid-20-70-10 {
+    grid-template-columns: 20% 70% 10%;
+}
+
+.float-right {
+    float: right;
+}
+
+.dd-remove-seq {
+    display: grid;
+    grid-template-columns: auto 52px;
+    grid-gap: 10px;
+}
+
+.dd-remove-seq > button {
+    width: 52px;
+    height: 48px;
+}
+
+dd-remove-seq > button:hover {
+    cursor: pointer;
 }
 /*  DAY INFO END  */

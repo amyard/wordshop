@@ -148,9 +148,16 @@ namespace WordShop.Controllers
 
 
         #region  dayinfo
+        [Route("day-info")]
         public async Task<ActionResult> AdminDayInfo()
         {
             return View(await _dayInfoRepository.GetListOfDayInfosAsync());
+        }
+        
+        [Route("day-info/create")]
+        public async Task<ActionResult> AdminDayInfoCreate()
+        {
+            return View();
         }
         #endregion
     }

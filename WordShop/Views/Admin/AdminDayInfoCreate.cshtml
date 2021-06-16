@@ -1,0 +1,135 @@
+﻿
+@section css {
+    <link href="~/css/admin-page.css" rel="stylesheet">
+}
+
+<partial name="_AdminLayout" />
+
+<main class="home mt-5">
+    <div class="container">
+        
+        <form method="post">
+            <div class="p-3 border">
+                <div class="course-start-form__title">
+                    <h2>Создать новый день</h2>
+                </div>
+                <div class="col-8 pt-4">
+                    <div class="d-grid grid-80">
+                        <div>
+                            <label>Название дня</label>
+                        </div>
+                        <div>
+                            <input class="form-control day-name" type="text" placeholder="День 1" required/>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid grid-80">
+                        <div>
+                            <label>Позиция</label>
+                        </div>
+                        <div>
+                            <input class="form-control day-position" type="number" required/>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="d-grid grid-80 day-info-block">
+                        <div class="day-info-block-item">
+                            <div class="d-grid grid-80">
+                                <div>
+                                    <label>Название блока</label>
+                                </div>
+                                <div>
+                                    <input class="form-control day-block-name" type="text" placeholder="Чтение / Слова / Грамматика" required/>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid grid-20-70-10">
+                                <div>
+                                    <label>Пункты блока</label>
+                                </div>
+                                <div class="seq-item-list">
+                                    <div class="dd-remove-seq mb-5">
+                                        <input class="form-control day-block-seq-name" type="text" placeholder="Видео урок 1. Разберем самый ..." required/>
+                                        <a class="btn btn-danger remove-seq-item" onclick="removeSeqItem(event);">-</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="btn-success btn float-right" onclick="addSeqItem(event);">+</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="add-additional-block mt-5">
+                            <a class="btn btn-success" onclick="addBlock(event);">Добавить Блок</a>
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group row course-start-form__buttons">
+                        <div class="col-8 offset-4">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-primary form-control day-info-save-data">Сохранить</button>
+                                </div>
+                                <div class="col">
+                                    <a asp-controller="Admin" asp-action="AdminDayInfo" class="btn btn-success form-control">Вернутся к списку дней</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</main>
+
+@section scripts {
+    <script>
+        function removeSeqItem(event) {
+            event.target.parentElement.remove();            
+        }
+        
+        function addSeqItem(event) {
+            var elem = $(event.target.parentElement.parentElement).find(".seq-item-list")[0];
+            
+            $(elem).append('<div class="dd-remove-seq mb-5">' +
+                                            '<input class="form-control day-block-seq-name" type="text" placeholder="Видео урок 1. Разберем самый ..." required/>' +
+                                            '<a class="btn btn-danger remove-seq-item" onclick="removeSeqItem(event);">-</a>' +
+                                        '</div>');        
+        }
+        
+        function addBlock(event) {
+            $(".add-additional-block").before('<div class="day-info-block-item">' +
+                                            '<div class="d-grid grid-80">' +
+                                                '<div>' +
+                                                    '<label>Название блока</label>' +
+                                                '</div>' +
+                                                '<div>' +
+                                                    '<input class="form-control day-block-name" type="text" placeholder="Чтение / Слова / Грамматика" required/>' +
+                                                '</div>' +
+                                            '</div>' +
+                                            '<div class="d-grid grid-20-70-10">' +
+                                                '<div>' +
+                                                    '<label>Пункты блока</label>' +
+                                                '</div>' +
+                                                '<div class="seq-item-list">' +
+                                                    '<div class="dd-remove-seq mb-5">' +
+                                                        '<input class="form-control day-block-seq-name" type="text" placeholder="Видео урок 1. Разберем самый ..." required/>' +
+                                                        '<a class="btn btn-danger remove-seq-item" onclick="removeSeqItem(event);">-</a>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div>' +
+                                                    '<a class="btn-success btn float-right" onclick="addSeqItem(event);">+</a>' +
+                                                '</div>' +
+                                            '</div>' +
+                                        '</div>');
+        }
+        
+    </script>
+    
+    <script src="~/js/create-day-info.js"></script>
+}

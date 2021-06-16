@@ -37,6 +37,8 @@ namespace WordShop
             services.AddScoped<ITariffBenefitRepository, TariffBenefitRepository>();
             services.AddScoped<ITariffBenefitOrderedRepository, TariffBenefitOrderedRepository>();
             services.AddScoped<IDayInfoRepository, DayInfoRepository>();
+            services.AddScoped<IDayInfoBlockRepository, DayInfoBlockRepository>();
+            services.AddScoped<IDayInfoSequenceItemRepository, DayInfoSequenceItemRepository>();
             
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

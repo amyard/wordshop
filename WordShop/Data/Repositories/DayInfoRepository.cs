@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WordShop.Data.Interfaces;
 using WordShop.Models.DayInfo;
+using WordShop.Models.DTOs;
 
 namespace WordShop.Data.Repositories
 {
@@ -23,6 +24,20 @@ namespace WordShop.Data.Repositories
                     .ThenInclude(s => s.DayInfoSequenceItems.OrderByDescending(t => t.Id))
                 .OrderBy(d => d.Position)
                 .ToArrayAsync();
+        }
+
+        public async Task<int> CreateDayInfoAsync(DayInfoDto dayInfoDto)
+        {
+            DayInfo dayInfo = new DayInfo
+            {
+                Title = dayInfoDto.DayName,
+                Position =  dayInfoDto.DayPosition
+            };
+
+            await _context.DayInfo.AddAsync(dayInfo);
+            await _context.SaveChangesAsync();
+
+            return dayInfo.Id;
         }
     }
 }
