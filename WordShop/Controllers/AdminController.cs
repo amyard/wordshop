@@ -155,10 +155,18 @@ namespace WordShop.Controllers
         }
         
         [Route("day-info/create")]
-        public async Task<ActionResult> AdminDayInfoCreate()
+        public ActionResult AdminDayInfoCreate()
         {
             return View();
         }
+        
+        public async Task<IActionResult> AdminDayInfoDelete(int id)
+        {
+            await _dayInfoRepository.DeleteDayInfoAsync(id);
+            
+            return RedirectToAction(nameof(AdminDayInfo)); 
+        }
+        
         #endregion
     }
 }

@@ -39,5 +39,16 @@ namespace WordShop.Data.Repositories
 
             return dayInfo.Id;
         }
+
+        public async Task DeleteDayInfoAsync(int dayId)
+        {
+            var dayInfo = await _context.DayInfo.Where(x => x.Id == dayId).FirstOrDefaultAsync();
+
+            if (dayInfo != null)
+            {
+                _context.DayInfo.Remove(dayInfo);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
