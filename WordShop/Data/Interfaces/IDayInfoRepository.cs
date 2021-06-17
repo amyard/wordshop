@@ -10,5 +10,6 @@ namespace WordShop.Data.Interfaces
         Task<IEnumerable<DayInfo>> GetListOfDayInfosAsync();
         Task<int> CreateDayInfoAsync(DayInfoDto dayInfoDto);
         Task DeleteDayInfoAsync(int dayId);
+        Task<DayInfo> GetDayInfoByIdAsync(int id);
     }
 }

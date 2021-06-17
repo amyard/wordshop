@@ -91,6 +91,11 @@
     margin-bottom: 5px !important;
 }
 
+.b-b-g {
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
 /*  TARIFF SECTION START  */
 
 .tariff-item {
@@ -182,7 +187,7 @@
     height: 48px;
 }
 
-dd-remove-seq > button:hover {
+.dd-remove-seq > button:hover {
     cursor: pointer;
 }
 /*  DAY INFO END  */

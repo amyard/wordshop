@@ -65,22 +65,26 @@ namespace WordShop.Controllers
         [Route("create-day-info")]
         public async Task<ActionResult> CreateDayInfoAsync([FromBody] DayInfoDto dayInfoDto)
         {
-            if (dayInfoDto != null)
+            if (dayInfoDto == null)
+                return Json(new {success = false, message = "work"});
+
+            if (dayInfoDto.DayInfoId != 0)
+                await _dayInfoRepository.DeleteDayInfoAsync(dayInfoDto.DayInfoId);
+                    
+            int dayId = await _dayInfoRepository.CreateDayInfoAsync(dayInfoDto);
+            
+            if (dayInfoDto.BlockInfo.Count > 0)
             {
-                int dayId = await _dayInfoRepository.CreateDayInfoAsync(dayInfoDto);
-                
-                if (dayInfoDto.BlockInfo.Count > 0)
+                foreach (var blockItem in dayInfoDto.BlockInfo)
                 {
-                    foreach (var blockItem in dayInfoDto.BlockInfo)
-                    {
-                        int blockId = await _dayInfoBlockRepository.CreateDayInfoBlockAsync(blockItem.BlockTitle, dayId);
-                        
-                        if(blockItem.Text.Count > 0)
-                            await _dayInfoSequenceItemRepository.CreateSequencesFromArrayAsync(blockItem.Text, blockId);
-                    }
+                    int blockId = await _dayInfoBlockRepository.CreateDayInfoBlockAsync(blockItem.BlockTitle, dayId);
+                    
+                    if(blockItem.Text.Count > 0)
+                        await _dayInfoSequenceItemRepository.CreateSequencesFromArrayAsync(blockItem.Text, blockId);
                 }
             }
-            return Json(new {success = true, message = "work"}); 
+
+            return Json(new {success = true, message = "work"});
         }
     }
 }

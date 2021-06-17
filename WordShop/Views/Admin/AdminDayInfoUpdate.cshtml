@@ -1,0 +1,102 @@
+﻿@model WordShop.Models.DayInfo.DayInfo;
+
+@section css {
+    <link href="~/css/admin-page.css" rel="stylesheet">
+}
+
+
+<partial name="_AdminLayout" />
+
+<main class="home mt-5">
+    <div class="container">
+        
+        <form method="post">
+            <input type="hidden" asp-for="Id" id="day-info-id" />
+            <div class="p-3 border">
+                <div class="course-start-form__title">
+                    <h2>Редактировать информацию</h2>
+                </div>
+                
+                <div class="col-8 pt-4">
+                    <div class="d-grid grid-80">
+                        <div>
+                            <label>Название дня</label>
+                        </div>
+                        <div>
+                            <input class="form-control day-name" type="text" asp-for="Title" required/>
+                        </div>
+                    </div>
+
+                    <div class="d-grid grid-80">
+                        <div>
+                            <label>Позиция</label>
+                        </div>
+                        <div>
+                            <input class="form-control day-position" type="number" asp-for="Position" required/>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-grid grid-80 day-info-block">
+                        @for (var i = 0; i < Model.DayInfoBlocks.Count; i++)
+                        {
+                            <div class="day-info-block-item b-b-g">
+                                <div class="d-grid grid-80">
+                                    <div>
+                                        <label>Название блока</label>
+                                    </div>
+                                    <div>
+                                        <input class="form-control day-block-name" type="text" asp-for="DayInfoBlocks[i].Title" required/>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid grid-20-70-10">
+                                    <div>
+                                        <label>Пункты блока</label>
+                                    </div>
+                                    
+                                    <div class="seq-item-list">
+                                    @for (var j = 0; j < Model.DayInfoBlocks[i].DayInfoSequenceItems.Count; j++)
+                                    {
+                                        <div class="dd-remove-seq mb-5">
+                                            <input class="form-control day-block-seq-name" type="text" asp-for="DayInfoBlocks[i].DayInfoSequenceItems[j].Text" required/>
+                                            <a class="btn btn-danger remove-seq-item" onclick="removeSeqItem(event);">-</a>
+                                        </div>
+                                    }
+                                    </div>
+                                    
+                                    <div>
+                                        <a class="btn-success btn float-right" onclick="addSeqItem(event);">+</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="add-additional-block mt-5">
+                            <a class="btn btn-success" onclick="addBlock(event);">Добавить Блок</a>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row course-start-form__buttons">
+                        <div class="col-8 offset-4">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-primary form-control day-info-save-data">Обновить информацию</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</main>
+
+
+@section scripts {
+    <script type="text/javascript" src="~/js/day-info.js"></script>
+}

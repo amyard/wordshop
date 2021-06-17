@@ -167,6 +167,11 @@ namespace WordShop.Controllers
             return RedirectToAction(nameof(AdminDayInfo)); 
         }
         
+        public async Task<IActionResult> AdminDayInfoUpdate(int id)
+        {
+            return View(await _dayInfoRepository.GetDayInfoByIdAsync(id)); 
+        }
+        
         #endregion
     }
 }

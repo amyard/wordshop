@@ -50,5 +50,15 @@ namespace WordShop.Data.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<DayInfo> GetDayInfoByIdAsync(int id)
+        {
+            var dayInfo = await _context.DayInfo.Where(x => x.Id == id)
+                .Include(x => x.DayInfoBlocks)
+                .ThenInclude(y => y.DayInfoSequenceItems)
+                .FirstOrDefaultAsync();
+
+            return dayInfo;
+        }
     }
 }

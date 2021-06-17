@@ -32,7 +32,8 @@
 						}
 						
 						<div class="slider-action-btn">
-                        	<a href="" class="btn btn-success">Редактировать</a>
+							<a class="btn btn-success"
+							   asp-route-id="@dayItem.Id" asp-controller="Admin" asp-action="AdminDayInfoUpdate">Редактировать</a>
 							<a class="btn btn-primary ml-5" onclick="return confirm('Вы действительно хотите удалить?')"
 							   asp-route-id="@dayItem.Id" asp-controller="Admin" asp-action="AdminDayInfoDelete">Удалить</a>
                         </div>
