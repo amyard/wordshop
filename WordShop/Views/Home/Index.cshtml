@@ -306,78 +306,74 @@
 		</div>
 	</section>
 
-	<section class="section-padding gradient-section tariffs-section" id="tariff">
-		<div class="container">
-			<div class="section-title">
-				<h2>Тарифы</h2>
-			</div>
+    <section class="section-padding gradient-section tariffs-section" id="tariff">
+        <div class="container">
+            <div class="section-title">
+                <h2>Тарифы</h2>
+            </div>
 
-			<div class="tariffs-block js-tariff-slider">
-				
-				@foreach (var item in Model)
-				{
-					<div class="item-wrapper">
-						<div class="tariffs-item">
-							<div class="tariffs-item-title" data-id="@item.Id">@item.Name</div>
-							<div class="tariffs-item-price">$@item.NewPrice&nbsp;
-								<span class="old-price">/&nbsp;</span>
-								<s class="old-price">$@item.OldPrice</s>
-								</div>
-							<button type="button" class="btn primary-btn" data-modal="tariff-modal">Купить тариф</button>
-							
-							@if (item.Id == 1)
-							{
-								<ul class="include-list">
-									<li>Аудио и pdf-файлы с текстом  рассказа</li>
-									<li>Видеоуроки с грамматикой</li>
-									<li>Интерактивные игры со словами</li>
-								</ul>
-								<ul class="exclude-list">
-									<li>Доступ к специальному чату с участниками</li>
-									<li>Ответы на вопросы в чате от Анны</li>
-									<li>Проверка домашних заданий</li>
-									<li>Возможность получить бонусный урок про знакомство с иностранцами</li>
-									<li>1,5 часовое индивидуальное занятие с Анной</li>
-								</ul>
-							}
-							else if (item.Id == 2)
-							{
-								<ul class="include-list">
-									<li>Аудио и pdf-файлы с текстом  рассказа</li>
-									<li>Видеоуроки с грамматикой</li>
-									<li>Интерактивные игры со словами</li>
-								</ul>
-								<ul class="exclude-list">
-									<li>Доступ к специальному чату с участниками</li>
-									<li>Ответы на вопросы в чате от Анны</li>
-									<li>Проверка домашних заданий</li>
-									<li>Возможность получить бонусный урок про знакомство с иностранцами</li>
-									<li>1,5 часовое индивидуальное занятие с Анной</li>
-								</ul>
-							} 
-							else if (item.Id == 3)
-							{
-								<ul class="include-list">
-									<li>Аудио и pdf-файлы с текстом рассказа</li>
-									<li>Видеоуроки с грамматикой</li>
-									<li>Интерактивные игры со словами</li>
-									<li>Доступ к специальному чату с участниками</li>
-									<li>Ответы на вопросы в чате от Анны</li>
-									<li>Проверка домашних заданий</li>
-									<li>Возможность получить бонусный урок про знакомство с иностранцами</li>
-								</ul>
-								<ul class="exclude-list">
-									<li>1,5 часовое индивидуальное занятие с Анной</li>
-								</ul>
-							}
-						</div>
-					</div>
-				}
-				
-			</div>
+            <div class="tariffs-block js-tariff-slider">
 
-		</div>
-	</section>
+                <div class="item-wrapper">
+                    <div class="tariffs-item">
+                        <div class="tariffs-item-title">Bronze</div>
+                        <div class="tariffs-item-price">$2&nbsp;<span class="old-price">/&nbsp;<s class="old-price">$4</s></div>
+                        <button type="button" class="btn primary-btn" data-modal="tariff-modal">Купить тариф</button>
+                        <ul class="include-list">
+                            <li>Аудио и pdf-файлы с текстом  рассказа</li>
+                            <li>Видеоуроки с грамматикой</li>
+                            <li>Интерактивные игры со словами</li>
+                        </ul>
+                        <ul class="exclude-list">
+                            <li>Доступ к специальному чату с участниками</li>
+                            <li>Ответы на вопросы в чате от Анны</li>
+                            <li>Проверка домашних заданий</li>
+                            <li>Возможность получить бонусный урок про знакомство с иностранцами</li>
+                            <li>1,5 часовое индивидуальное занятие с Анной</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="item-wrapper">
+                    <div class="tariffs-item">
+                        <div class="tariffs-item-title">Silver</div>
+                        <div class="tariffs-item-price">$5&nbsp;<span class="old-price">/&nbsp;<s class="old-price">$9</s></div>
+                        <button type="button" class="btn primary-btn" data-modal="tariff-modal">Купить тариф</button>
+                        <ul class="include-list">
+                            <li>Аудио и pdf-файлы с текстом  рассказа</li>
+                            <li>Видеоуроки с грамматикой</li>
+                            <li>Интерактивные игры со словами</li>
+                            <li>Доступ к специальному чату с участниками</li>
+                            <li>Ответы на вопросы в чате от Анны</li>
+                            <li>Проверка домашних заданий</li>
+                            <li>Возможность получить бонусный урок про знакомство с иностранцами</li>
+                        </ul>
+                        <ul class="exclude-list">
+                            <li>1,5 часовое индивидуальное занятие с Анной</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="item-wrapper">
+                    <div class="tariffs-item">
+                        <div class="tariffs-item-title">Gold</div>
+                        <div class="tariffs-item-price">$10&nbsp;<span class="old-price">/&nbsp;</span><s class="old-price">$18</s></div>
+                        <button type="button" class="btn primary-btn" data-modal="tariff-modal">Купить тариф</button>
+                        <ul class="include-list">
+                            <li>Аудио и pdf-файлы с текстом  рассказа</li>
+                            <li>Видеоуроки с грамматикой</li>
+                            <li>Интерактивные игры со словами</li>
+                            <li>Доступ к специальному чату с участниками</li>
+                            <li>Ответы на вопросы в чате от Анны</li>
+                            <li>Проверка домашних заданий</li>
+                            <li>Возможность получить бонусный урок про знакомство с иностранцами</li>
+                            <li>1,5 часовое индивидуальное занятие с Анной</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 </main>
 
 
