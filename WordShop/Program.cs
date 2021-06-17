@@ -113,6 +113,7 @@ namespace WordShop
                 {
                     var tariffs = new List<Tariff>
                     {
+                        new() {Name = "Default", NewPrice = 1, OldPrice = 4, Courses = 0, Level = 0},
                         new() {Name = "Bronze", NewPrice = 2, OldPrice = 4},
                         new() {Name = "Silver", NewPrice = 5, OldPrice = 9},
                         new() {Name = "Gold", NewPrice = 10, OldPrice = 18}
