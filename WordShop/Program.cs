@@ -35,21 +35,21 @@ namespace WordShop
                     var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
 
                     // add migrations if db does not exists
-                    await context.Database.MigrateAsync();
+                    // await context.Database.MigrateAsync();
 
-                    await GenerateCourseStartDate(context, loggerFactory);
-                    await GenerateTariffs(context, loggerFactory);
-                    await GenerateTariffBenefits(context, loggerFactory);
-                    await GenerateOrderedTariffBenefits(context, loggerFactory);
+                    // await GenerateCourseStartDate(context, loggerFactory);
+                    // await GenerateTariffs(context, loggerFactory);
+                    // await GenerateTariffBenefits(context, loggerFactory);
+                    // await GenerateOrderedTariffBenefits(context, loggerFactory);
+                    //
+                    // await GenerateDayInfo(context, loggerFactory);
+                    // await GenerateDayInfoBlock(context, loggerFactory);
+                    // await GenerateDayInfoBlockItem(context, loggerFactory);
                     
-                    await GenerateDayInfo(context, loggerFactory);
-                    await GenerateDayInfoBlock(context, loggerFactory);
-                    await GenerateDayInfoBlockItem(context, loggerFactory);
-                    
-                    await GenerateNewRoles(roleManager, loggerFactory);
-                    await GenerateNewUsers(userManager, roleManager, loggerFactory);
-                    
-                    await context.SaveChangesAsync();
+                    // await GenerateNewRoles(roleManager, loggerFactory);
+                    // await GenerateNewUsers(userManager, roleManager, loggerFactory);
+                    //
+                    // await context.SaveChangesAsync();
                 }
                 catch (Exception ex)
                 {

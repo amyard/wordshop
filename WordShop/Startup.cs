@@ -15,6 +15,7 @@ using WordShop.Data;
 using WordShop.Data.Interfaces;
 using WordShop.Data.Repositories;
 using WordShop.Enums;
+using WordShop.Models;
 
 namespace WordShop
 {
@@ -39,6 +40,8 @@ namespace WordShop
             services.AddScoped<IDayInfoRepository, DayInfoRepository>();
             services.AddScoped<IDayInfoBlockRepository, DayInfoBlockRepository>();
             services.AddScoped<IDayInfoSequenceItemRepository, DayInfoSequenceItemRepository>();
+
+            services.Configure<TelegramSettingsModel>(Configuration.GetSection("TelegramSettings"));
             
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

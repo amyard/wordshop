@@ -21,7 +21,7 @@ namespace WordShop.Data.Repositories
         {
             return await _context.DayInfo
                 .Include(d => d.DayInfoBlocks.OrderBy(b => b.Id))
-                    .ThenInclude(s => s.DayInfoSequenceItems.OrderByDescending(t => t.Id))
+                    .ThenInclude(s => s.DayInfoSequenceItems.OrderBy(t => t.Id))
                 .OrderBy(d => d.Position)
                 .ToArrayAsync();
         }

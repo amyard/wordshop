@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.Payments;
@@ -12,20 +13,18 @@ namespace WordShop.Data.Repositories
 {
     public class TelegramRepository : ITelegramRepository
     {
-        // TODO ---> move private to appsettings
+        private readonly IOptions<TelegramSettingsModel> _telegramSettings;
         private static ITelegramBotClient botClient;
-        private const string apiToken = "1775052882:AAGxetPJvW9EmulVUxcrp_IzZHAnmsSnIPI";
-        
-        private const long chatIdGroup = -1001298396195;
-        private const long devChatId = 826890977;
-        private const long annaChatId = 403845820;
-
         private const string noData = "Номер не был укащан";
+
+        public TelegramRepository(IOptions<TelegramSettingsModel> telegramSettings)
+        {
+            _telegramSettings = telegramSettings;
+        }   
         
         public async Task SendNewCustomerMessageToGroup(CustomerInfo customerInfo)
         {
-            botClient = new TelegramBotClient(apiToken) {Timeout = TimeSpan.FromSeconds(10)};
-            //var me = botClient.GetMeAsync().Result;
+            botClient = new TelegramBotClient(_telegramSettings.Value.ApiToken) {Timeout = TimeSpan.FromSeconds(10)};
 
             string template = GetTelegramMessageFromTemplate(TelegramMessageTypes.NewCustomer);
             
@@ -40,9 +39,8 @@ namespace WordShop.Data.Repositories
                 customerInfo.Tariff.NewPrice
             );
 
-            // TODO ---> Change to senderIDs in prod.
-            // long[] senderIDs = {annaChatId, devChatId, chatIdGroup};
-            long[] devIDs = {devChatId};
+            //long[] senderIDs = { _telegramSettings.Value.AnnaChatId, _telegramSettings.Value.DevChatId, _telegramSettings.Value.ChatIdGroup };
+            long[] devIDs = { _telegramSettings.Value.DevChatId };
             
             foreach (var chatId in devIDs)
             {
