@@ -2622,3 +2622,48 @@ body.open-modal .modal.show
 {
     font-weight: 700;
 }
+
+.gradient-block-yellow 
+{
+    background: -webkit-gradient(linear, left top, right top, from(#fdd4ba), to(#fee6ea));
+    background: -webkit-linear-gradient(left, #fdd4ba 0%, #fee6ea 100%);
+    background:      -o-linear-gradient(left, #fdd4ba 0%, #fee6ea 100%);
+    background:         linear-gradient(to right, #fdd4ba 0%, #fee6ea 100%);
+}
+
+
+
+.gradient-block-pink
+{
+    background: -webkit-gradient(linear, left top, right top, from(#fde3e6), to(#fff8f9));
+    background: -webkit-linear-gradient(left, #fde3e6 0%, #fff8f9 100%);
+    background:      -o-linear-gradient(left, #fde3e6 0%, #fff8f9 100%);
+    background:         linear-gradient(to right, #fde3e6 0%, #fff8f9 100%);
+}
+
+.footer 
+{
+    position: relative;
+    padding-bottom: 48px;
+    padding-top: 48px;
+}
+
+.footer .tariffs-block 
+{
+    margin-top: 0px;
+}
+
+.payment-img
+{
+    width: 50%;
+    max-width: 120px;
+    max-height: 100%;
+}
+
+@media screen and (max-width: 1024px)
+{
+    .footer .tariffs-block  > .item-wrapper:not(:last-child) 
+    {
+        padding-bottom: 32px!important;
+    }
+}

@@ -65,6 +65,12 @@ namespace WordShop.Controllers
             return View(result);
         }
 
+        [Route("privacy-policy")]
+        public IActionResult PrivacyPolicy()
+        {
+            return View();
+        }
+
         [HttpPost]
         [Route("save-customer-info")]
         public async Task<ActionResult> SaveCustomerInfoAsync([FromBody] CustomerInfoRequest customerInfoRequest)
