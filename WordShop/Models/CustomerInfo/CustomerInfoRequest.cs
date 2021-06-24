@@ -15,6 +15,7 @@ namespace WordShop.Models.CustomerInfo
             ErrorMessage = "Адрес должен быть вида name@domain.com")]
         public string Email { get; set; }
         
+        [Required(ErrorMessage = "Заполните поле Телефон")]
         public string PhoneNumber { get; set; }
         
         [Required(ErrorMessage = "Выберите тариф")]

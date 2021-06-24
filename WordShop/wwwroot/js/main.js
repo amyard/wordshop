@@ -115,6 +115,9 @@ jQuery(function($){
                 email : true,
                 minlength: 7,
                 regex : /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
+            },
+            user_phone: {
+                required : true
             }
         },
         messages: {
@@ -127,6 +130,9 @@ jQuery(function($){
                 email : "Невалидная электронная почта",
                 minlength: "Поле должно быть более 7-ми и меньше 120-ти символов",
                 regex : "Адрес должен быть вида name@domain.com"
+            },
+            user_phone: {
+                required : "Заполните поле"
             }
         },
         errorClass: "validate-error",
@@ -140,7 +146,7 @@ jQuery(function($){
             var data = {
                 'fullName': $("#user_name").val(),
                 'email': $("#user_email").val(),
-                'phoneNumber': $("#user-phone").val(),
+                'phoneNumber': $("#user_phone").val(),
                 "tariffId" : $("#tariff-modal").attr("data-id")
             };
             

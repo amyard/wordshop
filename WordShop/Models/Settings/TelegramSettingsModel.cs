@@ -1,4 +1,4 @@
-﻿namespace WordShop.Models
+﻿namespace WordShop.Models.Settings
 {
     public class TelegramSettingsModel
     {

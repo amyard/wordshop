@@ -28,5 +28,7 @@ namespace WordShop.Models.CustomerInfo
         
         public int TariffId { get; set; }
         public virtual Tariff.Tariff Tariff { get; set; }
+
+        public Guid OrderId { get; set; }
     }
 }

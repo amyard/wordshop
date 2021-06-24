@@ -2,19 +2,23 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using WordShop.Data.Interfaces;
 using WordShop.Enums;
+using WordShop.Enums.Payment;
 using WordShop.Models;
 using WordShop.Models.CustomerInfo;
+using WordShop.Models.Payment;
+using WordShop.Models.Settings;
 using WordShop.Models.ViewModels;
 
 namespace WordShop.Controllers
@@ -27,14 +31,18 @@ namespace WordShop.Controllers
         private readonly ITelegramRepository _telegram;
         private readonly ICourseStartRepository _courseStartRepository;
         private readonly IDayInfoRepository _dayInfoRepository;
+        private readonly IOptions<LiqPaySettingsModel> _paymentSettings;
 
         private const Courses course = Courses.WordShop;
         private const Level level = Level.Beginner;
         
-        public HomeController(ILogger<HomeController> logger, ICustomerInfoRepository customerInfoRepository,
-            ITariffRepository tariffRepository, ITelegramRepository telegram, 
+        public HomeController(ILogger<HomeController> logger, 
+            ICustomerInfoRepository customerInfoRepository,
+            ITariffRepository tariffRepository, 
+            ITelegramRepository telegram, 
             ICourseStartRepository courseStartRepository,
-            IDayInfoRepository dayInfoRepository)
+            IDayInfoRepository dayInfoRepository,
+            IOptions<LiqPaySettingsModel> paymentSettings)
         {
             _logger = logger;
             _customerInfoRepository = customerInfoRepository;
@@ -42,6 +50,7 @@ namespace WordShop.Controllers
             _telegram = telegram;
             _courseStartRepository = courseStartRepository;
             _dayInfoRepository = dayInfoRepository;
+            _paymentSettings = paymentSettings;
         }
 
         # region public methods
@@ -76,7 +85,7 @@ namespace WordShop.Controllers
         public async Task<ActionResult> SaveCustomerInfoAsync([FromBody] CustomerInfoRequest customerInfoRequest)
         {
             if (!ModelState.IsValid)
-                return Json( GetModelInvalidError(ModelState) );
+                return Json(GetModelInvalidError(ModelState));
 
             JsonResponseResult customValidation = CheckModelValidation(customerInfoRequest);
 
@@ -91,21 +100,23 @@ namespace WordShop.Controllers
                 PhoneNumber = customerInfoRequest.PhoneNumber,
                 TariffId = customerInfoRequest.TariffId,
                 Courses = course,
-                CourseLevel = level
+                CourseLevel = level,
+                OrderId = Guid.NewGuid()
             };
-            
+
             await _customerInfoRepository.SaveCustomerInfoAsync(customer);
             await _customerInfoRepository.SaveAllAsync();
-            
+
             // payment process
-            
-            // telegram notification + email
             customer.Tariff = await _tariffRepository.GetTariffByIdAsync(customer.TariffId);
+            string paymentFullUrl = GeneratePaymentFullUrl(customer);
+
+            // telegram notification + email
             await _telegram.SendNewCustomerMessageToGroup(customer);
 
-            return Json(new {success = true, message = "work"}); 
+            return Json(new {success = true, message = "work"});
         }
-        
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -115,6 +126,58 @@ namespace WordShop.Controllers
         #endregion
 
         # region private methods
+        
+        private string GeneratePaymentFullUrl(CustomerInfo customer)
+        {
+            // TODO ---> override to redirect on website url with order id
+            string resultUrl = "https://www.google.com/";
+            string orderId = customer.OrderId.ToString();
+            
+            var paymentEntity = new LiqPayRequest
+            {
+                Version = 3,
+                PublicKey = _paymentSettings.Value.ApiPublicKey,
+                Action = LiqPayRequestAction.Pay,
+                Amount = Convert.ToDouble(customer.Tariff.NewPrice),
+                Currency = LiqPayCurrency.UAH,
+                Description = "testing purpose",
+                OrderId = orderId,
+                Language = LiqPayRequestLanguage.UK,
+                ResultUrl = resultUrl
+            };
+
+            // 1. convert to base64_encode the model
+            var jsonString = JObject.FromObject(paymentEntity,
+                new JsonSerializer { NullValueHandling = NullValueHandling.Ignore })
+                .ToString();
+            
+            byte[] textAsBytes = Encoding.UTF8.GetBytes(jsonString);
+            string data = Convert.ToBase64String(textAsBytes);
+            
+            // 2. create signature - concatenate private_key + data + private_key
+            // 3. base64_encode( sha1( sign_string) )
+            var stringToHash = string.Concat(_paymentSettings.Value.ApiPrivateKey, data, _paymentSettings.Value.ApiPrivateKey);
+            byte[] sha1 = SHA1Hash(stringToHash);
+            string signature = Convert.ToBase64String(sha1);
+            
+            // 4. result url
+            var result = string.Concat(
+                _paymentSettings.Value.CheckOutUrl,
+                "?data=", data,
+                "&signature=", signature
+            );
+
+            return result;
+        }
+
+        private byte[] SHA1Hash(string stringToHash)
+        {
+            using (var sha1 = new SHA1Managed())
+            {
+                return sha1.ComputeHash(Encoding.UTF8.GetBytes(stringToHash));
+            }
+        }
+
         private JsonResponseResult GetModelInvalidError(ModelStateDictionary modelState)
         {
             // TODO --> override to reflection and take ordering by model column name.

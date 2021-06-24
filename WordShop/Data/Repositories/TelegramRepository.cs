@@ -8,6 +8,7 @@ using WordShop.Data.Interfaces;
 using WordShop.Enums;
 using WordShop.Models;
 using WordShop.Models.CustomerInfo;
+using WordShop.Models.Settings;
 
 namespace WordShop.Data.Repositories
 {
