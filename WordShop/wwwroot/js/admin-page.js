@@ -15,9 +15,10 @@ function loadCustomerInfoDataTable() {
             { 'data': "phoneNumber", "width": "10%" },
             { 'data': "tariffName", "width": "10%" },
             { 'data': "tariffNewPrice", "width": "10%" },
-            { 'data': "courses", "width": "10%" },
+            //{ 'data': "courses", "width": "10%" },
             { 'data': "createdDate", "width": "10%" },
-            { 'data': "paymentStatus", "width": "10%" }
+            { 'data': "paymentStatus", "width": "10%" },
+            { 'data': "orderId", "width": "10%" }
         ]
     });
 }

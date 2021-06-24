@@ -11,5 +11,6 @@
         public string Courses { get; set; }
         public string CreatedDate { get; set; }
         public string PaymentStatus { get; set; }
+        public string OrderId { get; set; }
     }
 }

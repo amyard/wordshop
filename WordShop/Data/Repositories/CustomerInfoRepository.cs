@@ -32,7 +32,8 @@ namespace WordShop.Data.Repositories
                     TariffNewPrice = "$"+x.Tariff.NewPrice.ToString(),
                     Courses = x.Courses.ToString(),
                     CreatedDate = x.CreatedDate.ToString("dd/MM/yyyy HH:mm:ss"),
-                    PaymentStatus = x.PaymentStatus.ToString()
+                    PaymentStatus = x.PaymentStatus.ToString(),
+                    OrderId = x.OrderId.ToString()
                 })
                 .OrderByDescending(x => x.Id)
                 .ToListAsync();

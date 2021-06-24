@@ -114,7 +114,7 @@ namespace WordShop.Controllers
             // telegram notification + email
             await _telegram.SendNewCustomerMessageToGroup(customer);
 
-            return Json(new {success = true, message = "work"});
+            return Json(new {success = true, message = "work", redirectUrl = paymentFullUrl});
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -140,7 +140,7 @@ namespace WordShop.Controllers
                 Action = LiqPayRequestAction.Pay,
                 Amount = Convert.ToDouble(customer.Tariff.NewPrice),
                 Currency = LiqPayCurrency.UAH,
-                Description = "testing purpose",
+                Description = $"Оплата курсу {course} по тарифу {customer.Tariff.Name}",
                 OrderId = orderId,
                 Language = LiqPayRequestLanguage.UK,
                 ResultUrl = resultUrl

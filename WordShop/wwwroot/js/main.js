@@ -158,6 +158,10 @@ jQuery(function($){
                 data : JSON.stringify(data),
                 success: function (r){
                     if(r.success) {
+                        // redirect to payment
+                        window.location.href = r.redirectUrl;
+                        
+                        // Modal to display success message
                         $("#tariff-form").closest('.modal.modal-form').removeClass('before-show show');
                         $('.success-modal').addClass('before-show');
                         setTimeout(function() {
