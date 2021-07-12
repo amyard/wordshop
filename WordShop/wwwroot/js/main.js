@@ -161,7 +161,7 @@ jQuery(function($){
                         // redirect to payment
                         window.location.href = r.redirectUrl;
                         
-                        $("#tariff-form")[0].reset();
+                        //$("#tariff-form")[0].reset();
                     } else if (r.error == 1) {
                         $(".modal-error").append('<div class="modal-error-footer">'+r.message+'</div>');
                         $(".modal-error").removeClass("d-none");

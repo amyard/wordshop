@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -33,6 +34,7 @@ namespace WordShop.Controllers
         private readonly ICourseStartRepository _courseStartRepository;
         private readonly IDayInfoRepository _dayInfoRepository;
         private readonly IOptions<LiqPaySettingsModel> _paymentSettings;
+        private readonly IConfiguration _config;
 
         private const Courses course = Courses.WordShop;
         private const Level level = Level.Beginner;
@@ -43,7 +45,8 @@ namespace WordShop.Controllers
             ITelegramRepository telegram, 
             ICourseStartRepository courseStartRepository,
             IDayInfoRepository dayInfoRepository,
-            IOptions<LiqPaySettingsModel> paymentSettings)
+            IOptions<LiqPaySettingsModel> paymentSettings,
+            IConfiguration config)
         {
             _logger = logger;
             _customerInfoRepository = customerInfoRepository;
@@ -52,6 +55,7 @@ namespace WordShop.Controllers
             _courseStartRepository = courseStartRepository;
             _dayInfoRepository = dayInfoRepository;
             _paymentSettings = paymentSettings;
+            _config = config;
         }
 
         # region public methods
@@ -167,7 +171,8 @@ namespace WordShop.Controllers
         {
             // TODO ---> override to redirect on website url with order id
             BigInteger bigInt = new BigInteger(customer.OrderId.ToByteArray());
-            string resultUrl = $"https://localhost:5001?orderId={bigInt}";
+            var mainUrl = _config.GetSection("Credentials")["website"];
+            string resultUrl = $"https://{mainUrl}?orderId={bigInt}";
             string orderId = customer.OrderId.ToString();
             
             var paymentEntity = new LiqPayRequest
