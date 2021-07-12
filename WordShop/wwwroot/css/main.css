@@ -2667,3 +2667,40 @@ body.open-modal .modal.show
         padding-bottom: 32px!important;
     }
 }
+
+.cursor-pointer {
+    font-weight: bold;
+}
+
+.cursor-pointer:hover {
+    cursor: pointer;
+}
+
+.section-pd-36 {
+    padding: 36px 0px;
+}
+
+.section-pd-36 h2 {
+    text-align: center;
+    font-style: italic;
+}
+
+.telegram-link {
+    color: #f3556c !important;
+}
+
+.font-italic {
+    font-style: italic;
+}
+
+.font-bold  {
+    font-weight: bold;
+}
+
+.offer-list {
+    list-style-type: circle;
+}
+
+.offer-list li {
+    margin-left: 22px;
+}

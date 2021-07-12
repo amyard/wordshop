@@ -161,13 +161,6 @@ jQuery(function($){
                         // redirect to payment
                         window.location.href = r.redirectUrl;
                         
-                        // Modal to display success message
-                        $("#tariff-form").closest('.modal.modal-form').removeClass('before-show show');
-                        $('.success-modal').addClass('before-show');
-                        setTimeout(function() {
-                            $('.success-modal').addClass('show');
-                        }, 50);
-                        
                         $("#tariff-form")[0].reset();
                     } else if (r.error == 1) {
                         $(".modal-error").append('<div class="modal-error-footer">'+r.message+'</div>');
@@ -186,5 +179,20 @@ jQuery(function($){
             });
         }
     });
-    
+
+
+    $(document).ready(function() {
+        var url = window.location.href;
+        var domain = window.location.origin;
+        
+        if(url.includes("?orderId=")) {
+            history.pushState({}, null, domain);
+
+            // Modal to display success message
+            $("body").addClass("open-modal")
+            $("#tariff-form").closest('.modal.modal-form').removeClass('before-show show');
+            $('.success-modal').addClass('before-show show');
+        }
+    });
+   
 });

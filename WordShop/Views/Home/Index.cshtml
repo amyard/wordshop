@@ -1,5 +1,9 @@
 ﻿@model WordShop.Models.ViewModels.IndexViewModel;
 
+@{
+	ViewData["Title"] = "Марафон «Wordshop»";
+}
+
 <header class="header">
     <div class="container">
         <nav class="page-nav">
@@ -254,6 +258,12 @@
 
 		</div>
 	</section>
+	
+	<section class="section-pd-36">
+    	<div class="container">
+            <h2>Если у Вас вопросы, свяжитесь со мной по <a href="https://t.me/Annamixnevich" class="telegram-link">телеграмму</a>.</h2>
+    	</div>
+    </section>
 </main>
 
 
@@ -310,7 +320,7 @@
 </div>
 <!-- </modals -->
 
-@await Html.PartialAsync("_HeaderSection")
+@await Html.PartialAsync("_FooterSection")
 
 @section scripts {
 	<script src="~/js/general/bootstrap.bundle.min.js"></script>

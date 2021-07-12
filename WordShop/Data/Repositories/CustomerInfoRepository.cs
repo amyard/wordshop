@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,20 @@ namespace WordShop.Data.Repositories
                 })
                 .OrderByDescending(x => x.Id)
                 .ToListAsync();
+        }
+
+        public async Task<CustomerInfo> GetCustomerByGuidAsync(Guid orderId)
+        {
+            var customer = await _context.CustomerInfos
+                .Include(t => t.Tariff)
+                .FirstOrDefaultAsync(x => x.OrderId == orderId);
+
+            if (customer != null)
+                customer.PaymentStatus = PaymentStatus.Complete;
+
+            await _context.SaveChangesAsync();
+
+            return customer;
         }
 
         public async Task SaveCustomerInfoAsync(CustomerInfo customer)

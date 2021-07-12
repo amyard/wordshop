@@ -67,5 +67,8 @@ namespace WordShop.Models.Payment
 
         [JsonProperty("result_url")]
         public string ResultUrl { get; set; }
+        
+        [JsonProperty("server_url")]
+        public string ServerUrl { get; set; }
     }
 }

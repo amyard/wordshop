@@ -1,0 +1,38 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+	string email = String.Concat("mailto:", Configuration.GetSection("Credentials")["email"]);
+	string telegram = string.Concat("https://t.me/", Configuration.GetSection("Credentials")["telegramUserName"]);
+	string viber = string.Concat("viber://add?number=", Configuration.GetSection("Credentials")["viberNumber"]);
+}
+
+<header class="footer gradient-block-pink">
+    <div class="container">
+        <div class="tariffs-block">
+            <div class="item-wrapper">
+                <h3>Контактные данные</h3>
+                <ul>
+                    <li>ФИО: <b>Михневич Анна</b></li>
+                    <li>Номер телефона: <a href="tel:+380997656881" class="cursor-pointer">0997656881</a> / <a href="tel:+380682689723" class="cursor-pointer">0682689723</a></li>
+                    <li><a href="@telegram" class="cursor-pointer">Telegram</a></li>
+                    <li><a href="@viber" class="cursor-pointer">Viber</a></li>
+                    <li><a href="@email" class="cursor-pointer">Hаписать мне</a></li>
+                </ul>
+            </div>
+            
+            <div class="item-wrapper">
+                <h3>Способы оплаты</h3>
+                <img src="~/img/payment-4.png" alt="Payment" loading="lazy" class="payment-img">
+            </div>
+            
+            <div class="item-wrapper">
+                <ul>
+                    <li><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                    <li><a asp-controller="Home" asp-action="PrivacyPolicy">Политика конфиденциальности</a></li>
+                    <li><a asp-controller="Home" asp-action="PublicOffer">Договор публичной оферты</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

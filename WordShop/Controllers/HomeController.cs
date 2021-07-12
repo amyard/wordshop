@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,8 +56,20 @@ namespace WordShop.Controllers
 
         # region public methods
         
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? orderId)
         {
+            // payment redirect success
+            if (orderId != null)
+            {
+                var guido = GetGuidFromOrderString(orderId);
+
+                // найти и поменять статус
+                var customer = await _customerInfoRepository.GetCustomerByGuidAsync(guido);
+                
+                // уведомление на телеграм
+                await _telegram.SendNewCustomerMessageToGroup(customer, TelegramMessageTypes.PaymentSuccess);
+            }
+            
             CultureInfo ruRu = new CultureInfo("ru-RU");
             
             var startDateFromDB = _courseStartRepository.GetCourseStart();
@@ -74,10 +87,33 @@ namespace WordShop.Controllers
             return View(result);
         }
 
+        private static Guid GetGuidFromOrderString(string orderId)
+        {
+            byte[] bytes = new byte[16];
+            BigInteger bigInt = BigInteger.Parse(orderId);
+            
+            bigInt.ToByteArray().CopyTo(bytes, 0);
+            var guido = new Guid(bytes);
+            return guido;
+        }
+
         [Route("privacy-policy")]
         public IActionResult PrivacyPolicy()
         {
             return View();
+        }
+        
+        [Route("oferta")]
+        public IActionResult PublicOffer()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        [Route("payment-status")]
+        public IActionResult PaymentStatus([FromBody] PaymentStatusResponse response)
+        {
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -112,7 +148,7 @@ namespace WordShop.Controllers
             string paymentFullUrl = GeneratePaymentFullUrl(customer);
 
             // telegram notification + email
-            await _telegram.SendNewCustomerMessageToGroup(customer);
+            await _telegram.SendNewCustomerMessageToGroup(customer, TelegramMessageTypes.NewCustomer);
 
             return Json(new {success = true, message = "work", redirectUrl = paymentFullUrl});
         }
@@ -130,20 +166,22 @@ namespace WordShop.Controllers
         private string GeneratePaymentFullUrl(CustomerInfo customer)
         {
             // TODO ---> override to redirect on website url with order id
-            string resultUrl = "https://www.google.com/";
+            BigInteger bigInt = new BigInteger(customer.OrderId.ToByteArray());
+            string resultUrl = $"https://localhost:5001?orderId={bigInt}";
             string orderId = customer.OrderId.ToString();
             
             var paymentEntity = new LiqPayRequest
             {
                 Version = 3,
-                PublicKey = _paymentSettings.Value.ApiPublicKey,
+                PublicKey = _paymentSettings.Value.TestPublicKey,
                 Action = LiqPayRequestAction.Pay,
                 Amount = Convert.ToDouble(customer.Tariff.NewPrice),
                 Currency = LiqPayCurrency.UAH,
                 Description = $"Оплата курсу {course} по тарифу {customer.Tariff.Name}",
                 OrderId = orderId,
                 Language = LiqPayRequestLanguage.UK,
-                ResultUrl = resultUrl
+                ResultUrl = resultUrl,
+                ServerUrl = resultUrl + "payment-status"
             };
 
             // 1. convert to base64_encode the model
@@ -156,7 +194,7 @@ namespace WordShop.Controllers
             
             // 2. create signature - concatenate private_key + data + private_key
             // 3. base64_encode( sha1( sign_string) )
-            var stringToHash = string.Concat(_paymentSettings.Value.ApiPrivateKey, data, _paymentSettings.Value.ApiPrivateKey);
+            var stringToHash = string.Concat(_paymentSettings.Value.TestPrivateKey, data, _paymentSettings.Value.TestPrivateKey);
             byte[] sha1 = SHA1Hash(stringToHash);
             string signature = Convert.ToBase64String(sha1);
             
